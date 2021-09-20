@@ -22,7 +22,7 @@ const getProducts = async (req, res) => {
 
 // GET a product by product ID
 const getProductById = async (req, res) => {
-    const { productId } = req.params; // Product ID Here
+    const { _id } = req.params; // Product ID Here
 
     try {
         // New Variable to Filter Product
@@ -30,7 +30,7 @@ const getProductById = async (req, res) => {
         // forEach iterates through each product
         // If product _id matches req.params, assign product to the variable "product"
         items.forEach((item) => {
-            if (item._id == productId) {
+            if (item._id == _id) {
                 product = item;
             }
         })
@@ -42,7 +42,7 @@ const getProductById = async (req, res) => {
         else {
             return await res.status(200).json({
                 status: 200,
-                message: `Successfully retrieved Product # ${productId}.`,
+                message: `Successfully retrieved Product # ${_id}.`,
                 data: product,
             })
         }

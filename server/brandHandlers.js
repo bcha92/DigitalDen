@@ -23,7 +23,7 @@ const getBrands = async (req, res) => {
 
 // GET a list of products by brand name
 const getProductsByBrand = async (req, res) => {
-    const { brandId } = req.params; // Company ID Here
+    const { _id } = req.params; // Company ID Here
 
     try {
         // New Variable to Filter Company
@@ -31,7 +31,7 @@ const getProductsByBrand = async (req, res) => {
         // forEach iterates through each company
         // If _id in company matches with req.params, push company to the variable "company"
         companies.forEach((co) => {
-            if (co._id == brandId) {
+            if (co._id == _id) {
                 company = co;
             }
         })
@@ -41,7 +41,7 @@ const getProductsByBrand = async (req, res) => {
         // forEach iterates through each item.
         // If companyId in product matches with req.params, push product to new Array.
         items.forEach((product) => {
-            if (product.companyId == brandId) {
+            if (product.companyId == _id) {
                 productsOfBrand.push(product);
             }
         })
@@ -55,7 +55,7 @@ const getProductsByBrand = async (req, res) => {
             
             return await res.status(200).json({
                 status: 200,
-                message: `Successfully retrieved list of products from ${company.name}, Company ID# ${brandId}.`,
+                message: `Successfully retrieved list of products from ${company.name}, Company ID# ${_id}.`,
                 store: company,
                 data: productsOfBrand,
             })

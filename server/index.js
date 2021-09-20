@@ -37,13 +37,13 @@ express()
 
   // READY TO USE // SEE "---handlers.js" files for Descriptions
   .get("/brands", getBrands)
-  .get("/brands/:brandId", getProductsByBrand)
+  .get("/brands/:_id", getProductsByBrand)
   
   .get("/products", getProducts)
-  .get("/products/:productId", getProductById)
+  .get("/products/:_id", getProductById)
 
   // NOT READY (DO NOT USE!!!)
-  .patch("/products/:productId", updateProduct)
+  .patch("/products/:_id", updateProduct)
 
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
