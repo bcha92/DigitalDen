@@ -4,6 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
+// Handlers
+const { getBrands, getProductsByBrand } = require("./brandHandlers");
+const { getProducts, getProductById } = require("./productHandlers");
+const { getCategories, getProductsByCategory } = require("./categoryHandlers");
+
 const PORT = 4000;
 
 express()
