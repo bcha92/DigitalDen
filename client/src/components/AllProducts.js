@@ -22,6 +22,8 @@ export const AllProducts = () => {
       });
   }, []);
 
+  console.log(products, "this is products");
+
   return (
     <Wrapper>
       <Title>
@@ -41,6 +43,9 @@ export const AllProducts = () => {
                     <Img src={product.imageSrc} />
                     <p>{product.name}</p>
                     <p>{product.price}</p>
+                    {product.numInStock === 0 && (
+                      <OutOfStock>OUT OF STOCK</OutOfStock>
+                    )}
                   </Card>
                 </Link>
               );
@@ -91,4 +96,12 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const OutOfStock = styled.div`
+  background-color: #1313dd;
+  color: white;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 30px;
 `;
