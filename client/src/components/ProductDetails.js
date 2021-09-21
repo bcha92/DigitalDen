@@ -23,6 +23,17 @@ export const ProductDetails = () => {
       });
   }, [_id]);
 
+  const handleClick = (e) => {
+    if (localStorage.getItem("productInfo") === null) {
+      localStorage.setItem("productInfo", JSON.stringify([]));
+    }
+    const productArray = JSON.parse(localStorage.getItem("productInfo"));
+
+    productArray.push(product);
+
+    localStorage.setItem("productInfo", JSON.stringify(productArray));
+  };
+
   return (
     <Wrapper>
       {isLoaded ? (
@@ -36,7 +47,9 @@ export const ProductDetails = () => {
             <h3>Body Location: {product.body_location}</h3>
             <h3>Price: {product.price}</h3>
             <h3>Number of Stock: {product.numInStock}</h3>
-            {product.numInStock > 0 && <Button>Add to cart</Button>}
+            {product.numInStock > 0 && (
+              <Button onClick={handleClick}>Add to cart</Button>
+            )}
           </Container2>
         </>
       ) : (
