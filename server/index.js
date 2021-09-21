@@ -6,7 +6,7 @@ const morgan = require("morgan");
 
 // Handlers
 const { getBrands, getProductsByBrand } = require("./brandHandlers");
-const { getProducts, getProductById, updateProduct } = require("./productHandlers");
+const { getProducts, getProductById, updateProductPurchase } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
 const { Error404 } = require("./ErrorHandler");
 
@@ -29,22 +29,18 @@ express()
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
+  
+    // EXAMPLE // FOR INSOMNIA TESTING ONLY!!!
+    // .get("/bacon", (req, res) => res.status(200).json("🥓"))
 
-  // REST endpoints // SEE "*****handlers.js" files for Information and Descriptions
-
-  // EXAMPLE // FOR INSOMNIA TESTING ONLY!!!
-  // .get("/bacon", (req, res) => res.status(200).json("🥓"))
-
-  // READY TO USE // SEE "---handlers.js" files for Descriptions
+  // REST endpoints // SEE each Handler in various "...handlers.js" files for Information and Descriptions
   .get("/brands", getBrands)
   .get("/brands/:_id", getProductsByBrand)
   
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
-
-  // NOT READY (DO NOT USE!!!)
-  .patch("/products/:_id", updateProduct)
-
+  .patch("/products/:_id", updateProductPurchase)
+  
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
 
