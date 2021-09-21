@@ -2,12 +2,14 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { Brands } from "./Brands";
+import { AllBrands } from "./AllBrands";
 import { Homepage } from "./Homepage";
 import { AllProducts } from "./AllProducts";
 import { ProductDetails } from "./ProductDetails";
 import { Category } from "./Category";
 import { Checkout } from "./Checkout";
+import { BrandProduct } from "./BrandProduct";
+import { SearchBar } from './SearchBar'
 
 const App = () => {
   return (
@@ -18,10 +20,10 @@ const App = () => {
           <Homepage />
         </Route>
         <Route exact path="/brands">
-          {/* <AllBrands /> */}
+          <AllBrands />
         </Route>
         <Route exact path="/brands/:_id">
-          <Brands />
+          <BrandProduct />
         </Route>
         <Route exact path="/details/:_id">
           <ProductDetails />
@@ -40,7 +42,6 @@ const App = () => {
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 };

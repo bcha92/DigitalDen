@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "./Header";
-import { Brands } from "./Brands";
+import { AllBrands } from "./AllBrands";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ export const Homepage = () => {
       {/* <Image></Image> */}
       {/* <Heading>Popular Categories</Heading> */}
       <HeadingBrand>Popular Brands</HeadingBrand>
-      <Brands />
+      <AllBrands />
       <Wrapper>
         <Row>
           <Link to="/brands?brand=Casio">
