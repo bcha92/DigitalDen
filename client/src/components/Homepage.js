@@ -8,18 +8,27 @@ import { Link } from "react-router-dom";
 import casioLogo from ".././components/assets/casio.png";
 import fitbitLogo from ".././components/assets/fitbit.png";
 import samsungLogo from ".././components/assets/samsung.png";
-// import polarLogo from ".././components/assets/polar.png";
 import nikeLogo from ".././components/assets/nike.png";
 import sonyLogo from ".././components/assets/sony.png";
 import tomtomLogo from ".././components/assets/tomtom.png";
 
+import backgroundImg from ".././components/assets/home-bg.jpg";
+
 export const Homepage = () => {
   return (
     <>
-      {/* <Image></Image> */}
+      <BackgroundContainer>
+        <BackgroundImg
+          style={{
+            width: "1450px",
+            height: "820px",
+          }}
+          src={backgroundImg}
+          alt="background"
+        />
+      </BackgroundContainer>
       {/* <Heading>Popular Categories</Heading> */}
       <HeadingBrand>Popular Brands</HeadingBrand>
-      <AllBrands />
       <Wrapper>
         <Row>
           <Link to="/brands?brand=Casio">
@@ -122,3 +131,11 @@ const ImgContainer = styled.div`
 `;
 
 const Img = styled.img``;
+
+const BackgroundContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+`;
+
+const BackgroundImg = styled.img``;
