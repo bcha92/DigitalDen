@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { SearchBar } from "./SearchBar";
 
 export const Header = () => {
   return (
     <>
+      <SearchBar />
       <HomeNavLink exact to="/">
         <Title>TITLE</Title>
       </HomeNavLink>
