@@ -3,11 +3,13 @@ import { Header } from "./Header";
 import { AllBrands } from "./AllBrands";
 import styled from "styled-components";
 
+// import { Category } from "./Category";
+
 import { Link } from "react-router-dom";
 
 import casioLogo from ".././components/assets/casio.png";
 import fitbitLogo from ".././components/assets/fitbit.png";
-import samsungLogo from ".././components/assets/samsung.png";
+import polarLogo from ".././components/assets/polar.png";
 import nikeLogo from ".././components/assets/nike.png";
 import sonyLogo from ".././components/assets/sony.png";
 import tomtomLogo from ".././components/assets/tomtom.png";
@@ -27,7 +29,8 @@ export const Homepage = () => {
           alt="background"
         />
       </BackgroundContainer>
-      {/* <Heading>Popular Categories</Heading> */}
+      {/* <Heading>Popular Categories</Heading>
+      <Category /> */}
       <HeadingBrand>Popular Brands</HeadingBrand>
       <Wrapper>
         <Row>
@@ -35,8 +38,8 @@ export const Homepage = () => {
             <ImgContainer>
               <Img
                 style={{
-                  width: "216px",
-                  height: "53px",
+                  width: "200px",
+                  height: "45px",
                 }}
                 src={casioLogo}
                 alt="casio"
@@ -46,7 +49,7 @@ export const Homepage = () => {
           <Link to="/brands?brand=Fitbit">
             <ImgContainer>
               <Img
-                style={{ width: "216px", height: "65px" }}
+                style={{ width: "216px", height: "50px" }}
                 src={fitbitLogo}
                 alt="fitbit"
               />
@@ -55,7 +58,7 @@ export const Homepage = () => {
           <Link to="/brands?brand=Nike">
             <ImgContainer>
               <Img
-                style={{ width: "210px", height: "150px" }}
+                style={{ width: "180px", height: "120px" }}
                 src={nikeLogo}
                 alt="nike"
               />
@@ -63,19 +66,19 @@ export const Homepage = () => {
           </Link>
         </Row>
         <Row>
-          <Link to="/brands?brand=Samsung">
+          <Link to="/brands?brand=Polar">
             <ImgContainer>
               <Img
-                style={{ width: "216px", height: "54px" }}
-                src={samsungLogo}
-                alt="samsung"
+                style={{ width: "216px", height: "120px" }}
+                src={polarLogo}
+                alt="polar"
               />
             </ImgContainer>
           </Link>
           <Link to="/brands?brand=Tomtom">
             <ImgContainer>
               <Img
-                style={{ width: "216px", height: "54px" }}
+                style={{ width: "216px", height: "64px" }}
                 src={tomtomLogo}
                 alt="tomtom"
               />
@@ -84,7 +87,7 @@ export const Homepage = () => {
           <Link to="/brands?brand=Sony">
             <ImgContainer>
               <Img
-                style={{ width: "216px", height: "54px" }}
+                style={{ width: "200px", height: "45px" }}
                 src={sonyLogo}
                 alt="sony"
               />
@@ -100,14 +103,16 @@ const Heading = styled.h3`
   display: flex;
   text-transform: uppercase;
   justify-content: space-around;
-  margin-top: 300px;
+  margin-top: 150px;
+  font-size: 25px;
 `;
 
 const HeadingBrand = styled.h3`
   display: flex;
   text-transform: uppercase;
   justify-content: space-around;
-  margin-top: 300px;
+  margin-top: 150px;
+  font-size: 25px;
 `;
 
 const Wrapper = styled.div`
@@ -127,7 +132,7 @@ const Row = styled.div`
 
 const ImgContainer = styled.div`
   width: 250px;
-  margin: 20px 0px;
+  margin: 20px 0px -5px;
 `;
 
 const Img = styled.img``;
@@ -138,4 +143,6 @@ const BackgroundContainer = styled.div`
   padding-top: 15px;
 `;
 
-const BackgroundImg = styled.img``;
+const BackgroundImg = styled.img`
+  border-radius: 10px;
+`;
