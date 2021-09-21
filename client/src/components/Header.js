@@ -3,12 +3,17 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 
+import { FaShoppingCart } from "react-icons/fa";
+
+import GlobalStyles from "./GlobalStyles";
+
 export const Header = () => {
   return (
     <>
-      <SearchBar />
+      <GlobalStyles />
+      {/* <SearchBar /> */}
       <HomeNavLink exact to="/">
-        <Title>TITLE</Title>
+        <Title>DIGITALDEN</Title>
       </HomeNavLink>
       <NavMenu>
         {/* <CategoriesDropDown /> */}
@@ -22,6 +27,9 @@ export const Header = () => {
         <StyledNavLink exact to="/products">
           <List>Shop All</List>
         </StyledNavLink>
+        <List>
+          <ShoppingCart />
+        </List>
       </NavMenu>
     </>
   );
@@ -35,19 +43,21 @@ const Title = styled.h1`
   text-align: center;
   font-weight: bold;
   color: black;
+  font-style: var(--heading-font-family);
+  font-size: 55px;
   padding-top: 50px;
 `;
 
-// list-style-type: none;
 const NavMenu = styled.ul`
   display: flex;
   text-transform: uppercase;
-  justify-content: space-around;
   margin-top: 80px;
+  justify-content: center;
 `;
 
 const List = styled.li`
   color: black;
+  font-style: var(--heading-font-family);
   display: inline-block;
   padding-right: 30px;
 
@@ -60,3 +70,7 @@ const List = styled.li`
 `;
 
 const StyledNavLink = styled(NavLink)``;
+
+const ShoppingCart = styled(FaShoppingCart)`
+  cursor: pointer;
+`;
