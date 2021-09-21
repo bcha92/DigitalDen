@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-//This page will show all products from the store.
-export const AllProducts = () => {
-  //this will store all products from fetch
+export const CategoryProduct = () => {
+  //this will store all products from a category from fetch
   const [products, setProducts] = useState();
   //will become true after the data from fetch as been stored
   const [isLoaded, setIsLoaded] = useState(false);
-
-  //retrieve all products
+  const { name } = useParams();
   useEffect(() => {
-    fetch(`/products`)
+    fetch(`/category/${name}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data);
@@ -22,12 +20,10 @@ export const AllProducts = () => {
       });
   }, []);
 
-  // console.log(products, "this is products");
-
   return (
     <Wrapper>
       <Title>
-        <h1>All Products</h1>
+        <h1>Products By {name}</h1>
       </Title>
       {isLoaded ? (
         <>

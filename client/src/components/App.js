@@ -9,7 +9,8 @@ import { ProductDetails } from "./ProductDetails";
 import { Category } from "./Category";
 import { Checkout } from "./Checkout";
 import { BrandProduct } from "./BrandProduct";
-import { SearchBar } from './SearchBar'
+import { SearchBar } from "./SearchBar";
+import { CategoryProduct } from "./CategoryProduct";
 
 const App = () => {
   return (
@@ -34,14 +35,15 @@ const App = () => {
         <Route exact path="/category">
           <Category />
         </Route>
-        <Route exact path="/category/:_id">
-          <Category />
+        <Route exact path="/category/:name">
+          <CategoryProduct />
         </Route>
         <Route exact path="/checkout">
           <Checkout />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
