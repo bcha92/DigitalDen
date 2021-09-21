@@ -11,9 +11,13 @@ export const Header = () => {
       <NavMenu>
         {/* <CategoriesDropDown /> */}
         {/* <BrandDropDown /> */}
-        <StyledNavLink exact to="/products">
+        <StyledNavLink exact to="/category">
           <List>Shop by Category</List>
+        </StyledNavLink>
+        <StyledNavLink exact to="/brands">
           <List>Shop by Brand</List>
+        </StyledNavLink>
+        <StyledNavLink exact to="/products">
           <List>Shop All</List>
         </StyledNavLink>
       </NavMenu>
