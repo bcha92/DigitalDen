@@ -8,6 +8,49 @@ export const Cart = () => {
   const cartItems = JSON.parse(localStorage.getItem("productInfo"));
   let subtotal = 0; // Subtotal Calculates the total amounts in the cart
 
+  // Deletes selected item from cart using itemId
+  const itemDelete = (itemId) => {
+    cartItems.forEach((item, index) => {
+      if (item._id === itemId) {
+        cartItems.splice(index, 1);
+        localStorage.setItem("productInfo", JSON.stringify(cartItems));
+        {/* Reloads current page for changes to take effect */}
+        window.location.reload();
+      }
+    })
+    
+  };
+
+  // Adds quantity to item in cart
+  const addQuantity = (itemId) => {
+    cartItems.forEach((item) => {
+      if (item._id === itemId) {
+        item.quantity += 1;
+        localStorage.setItem("productInfo", JSON.stringify(cartItems));
+        {/* Reloads current page for changes to take effect */}
+        window.location.reload();
+      }
+    })
+  };
+
+  // Removes quantity from item in cart
+  // And deletes IF quantity is zero
+  const removeQuantity = (itemId) => {
+    cartItems.forEach((item, index) => {
+      if (item._id === itemId) {
+        item.quantity -= 1;
+        // Delete from Cart if Quantity is Zero
+        if (item.quantity === 0) {
+          cartItems.splice(index, 1);
+        }
+        localStorage.setItem("productInfo", JSON.stringify(cartItems));
+        {/* Reloads current page for changes to take effect */}
+        window.location.reload();
+      }
+    })
+  };
+
+
   return (
     <div>
       {/* Shopping Cart Title */}
@@ -20,56 +63,63 @@ export const Cart = () => {
           <B>Your Cart is Empty</B>
         ) : (
           <>
+            {/* Table Header for Cart */}
             <ItemBar className="listHeader">
-              <B>Product Details</B>
-              <span></span>
-              <B>Price</B>
+                <B></B>
+                <B>Product Details</B>
+
+                <B>Quantity</B>
+                <B>Price</B>
             </ItemBar>
             <DivLine className="divHeader" />
 
             {cartItems.map((item, index) => {
-              subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item added
+              subtotal += item.price.slice(1) * item.quantity; // Subtotal Calculated with each item added
               return (
-                <>
-                  <ItemBar>
-                    <ItemImg alt={item.name} src={item.imageSrc} />
-                    <div>
-                      <B>{item.name}</B>
-                    </div>
-                    <B>{item.price}</B>
+                  <ItemBar key={item._id}>
+                    <LeftBar>
+                      <button onClick={() => itemDelete(item._id)}>x</button>
+                      <ItemImg alt={item.name} src={item.imageSrc} />{/* Image */}
+                      <NameWrap>
+                        <B>{item.name}</B>{/* Name */}
+                      </NameWrap>
+                    </LeftBar>
+                    <RightBar>
+                      <QuantityWrap>
+                        <span>{item.quantity}</span>
+                        <div>
+                          {/* Increment Quantity */}
+                          <button onClick={
+                            () => addQuantity(item._id)
+                          }>+</button>
+                          {/* Decrease Quantity: WARNING IF QUANTITY IS ZERO, ITEM IS REMOVED */}
+                          <button onClick={
+                            () => removeQuantity(item._id)
+                          }>-</button>
+                        </div>
+                      </QuantityWrap>
+                      <B className="price">{item.price}</B>
+                    </RightBar>
                   </ItemBar>
-                  <DivLine />
-                </>
               );
             })}
+          <DivLine />
           </>
         )}
 
-        {/* Promotional Discounts Added // TODO Maybe Add? */}
-        <ItemBar className="totalHead">
-          <B>Promotion: -${0.0 /* Add function here */}</B>
-        </ItemBar>
         {/* Subtotal is Calculated Here */}
         <ItemBar className="totalHead">
           <B>Subtotal: ${subtotal}</B>
         </ItemBar>
-        {/* Checkout Tab for Promo Code Addin or Head to Checkout */}
-        <CheckoutBar>
-          <div>
-            {false && <R>Thank you! Your Promotion Code has been Applied!</R>}
-            <p>If you have a promotion code, please enter it here:</p>
-            <PromoForm
-              onClick={(e) => {
-                e.preventDefault(); /* Perhaps a Function Here Could Do? */
-              }}
-            >
-              <PromoInput placeholder="Enter your Promotion Code" />
-              <ApplyPromo type="submit" value="Apply Discount" />
-            </PromoForm>
-          </div>
-          {/* Link will take you to "Checkout Page" */}
+        <CheckoutBar>{/* Link will take you to "Checkout Page" */}
+          
           <Link to="/checkout">
-            <ToCheckOut>Check Out</ToCheckOut>
+            <ToCheckOut disabled={
+              cartItems === null || cartItems.length === 0 ?
+              true : false
+            }>
+              Check Out
+            </ToCheckOut>
           </Link>
         </CheckoutBar>
       </CartWrapper>
@@ -117,17 +167,39 @@ const ItemBar = styled.div`
   }
 `;
 
+const LeftBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+const RightBar = styled(LeftBar)`
+  justify-content: flex-end;
+`;
+
 const ItemImg = styled.img`
   height: 100px;
   width: 100px;
+  margin: auto 20px;
+`;
+
+const NameWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const QuantityWrap = styled.div`
+  display: flex;
+  align-items: center;
+  & > span {margin-right: 10px};
+  & > div {
+    display: flex;
+    flex-direction: column;
+  };
 `;
 
 const B = styled.p`
   font-weight: bold;
-`;
-
-const R = styled.p`
-  color: crimson;
+  &.price {margin-left: 50px};
 `;
 
 const DivLine = styled.div`
@@ -143,25 +215,8 @@ const DivLine = styled.div`
 const CheckoutBar = styled.div`
   padding: 20px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
-`;
-
-const PromoForm = styled.form`
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
-`;
-
-const PromoInput = styled.input`
-  font-size: 14px;
-  width: 245px;
-  height: 40px;
-  margin-right: 10px;
-`;
-
-const ApplyPromo = styled(PromoInput)`
-  max-width: 150px;
 `;
 
 const ToCheckOut = styled.button`
