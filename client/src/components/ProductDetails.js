@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -15,7 +16,7 @@ export const ProductDetails = () => {
     fetch(`/products/${_id}`)
       .then((res) => res.json())
       .then((data) => {
-        setProduct(data.data);
+        setProduct({...data.data, quantity: 1});
         setIsLoaded(true);
       })
       .catch((error) => {
@@ -23,14 +24,30 @@ export const ProductDetails = () => {
       });
   }, [_id]);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
+    // Creates an empty array if "productInfo" is non-existent
     if (localStorage.getItem("productInfo") === null) {
       localStorage.setItem("productInfo", JSON.stringify([]));
     }
+    // Gets "productInfo" from localStorage and assigns to productArray
     const productArray = JSON.parse(localStorage.getItem("productInfo"));
 
-    productArray.push(product);
+    let itemFound = false;
+    // Iterates forEach to see if product already exist in productArray
+    productArray.forEach((item, index) => {
+      console.log(item);
+      // If it does exist, it simply increments the item quantity by 1
+      if (item._id === product._id) {
+        item.quantity += 1;
+        itemFound = true;
+      }
+    })
+    // If item is NOT found, product with 1 quantity is pushed
+    if (!itemFound) {
+      productArray.push(product);
+    }
 
+    // Once finished, array is set into local storage
     localStorage.setItem("productInfo", JSON.stringify(productArray));
   };
 
@@ -48,7 +65,9 @@ export const ProductDetails = () => {
             <h3>Price: {product.price}</h3>
             <h3>Number of Stock: {product.numInStock}</h3>
             {product.numInStock > 0 && (
-              <Button onClick={handleClick}>Add to cart</Button>
+              <Link to="/cart">
+                <Button onClick={handleClick}>Add to cart</Button>
+              </Link>
             )}
           </Container2>
         </>
