@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <>
       <GlobalStyles />
-      {/* <SearchBar /> */}
+      <SearchBar />
       <HomeNavLink exact to="/">
         <Title>DIGITALDEN</Title>
       </HomeNavLink>

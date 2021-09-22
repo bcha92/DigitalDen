@@ -1,6 +1,4 @@
 import React from "react";
-import { Header } from "./Header";
-import { AllBrands } from "./AllBrands";
 import styled from "styled-components";
 
 // import { Category } from "./Category";
@@ -99,13 +97,13 @@ export const Homepage = () => {
   );
 };
 
-const Heading = styled.h3`
-  display: flex;
-  text-transform: uppercase;
-  justify-content: space-around;
-  margin-top: 150px;
-  font-size: 25px;
-`;
+// const Heading = styled.h3`
+//   display: flex;
+//   text-transform: uppercase;
+//   justify-content: space-around;
+//   margin-top: 150px;
+//   font-size: 25px;
+// `;
 
 const HeadingBrand = styled.h3`
   display: flex;
