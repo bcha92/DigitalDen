@@ -6,8 +6,9 @@ const morgan = require("morgan");
 
 // Handlers
 const { getBrands, getProductsByBrand } = require("./brandHandlers");
-const { getProducts, getProductById, updateProductPurchase } = require("./productHandlers");
+const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
+const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
 const { Error404 } = require("./ErrorHandler");
 
 const PORT = 4000;
@@ -39,11 +40,11 @@ express()
   
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
-  .patch("/products/:_id", updateProductPurchase)
   
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
-
+  
+  .patch("/products", inventoryCheck, purchaseHandle)
   // ERROR Handler 404 Not Found
   .get("*", (req, res) => res.status(404).json(Error404))
 
