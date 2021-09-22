@@ -18,7 +18,7 @@ export const CategoryProduct = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [name]);
 
   return (
     <Wrapper>

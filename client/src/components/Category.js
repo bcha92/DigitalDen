@@ -21,8 +21,6 @@ export const Category = () => {
       });
   }, []);
 
-  console.log("this is test", category);
-
   return (
     <Wrapper>
       <Title>
