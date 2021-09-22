@@ -12,6 +12,7 @@ import { BrandProduct } from "./BrandProduct";
 // import { SearchBar } from "./SearchBar";
 import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
+import { Confirmation } from "./Confirmation";
 
 const App = () => {
   return (
@@ -44,6 +45,9 @@ const App = () => {
         </Route>
         <Route exact path="/cart">
           <Cart />
+        </Route>
+        <Route exact path="/confirmation">
+          <Confirmation />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>

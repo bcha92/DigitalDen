@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Checkout = () => {
   // const [errMessage, setErrMessage] = useState("");
+
+  const handleClick = () => {};
 
   return (
     <>
@@ -81,7 +84,9 @@ export const Checkout = () => {
             </InputRow>
             {/* {errMessage && <p style={{ color: "red" }}>{errMessage}</p>} */}
             {/* <BtnWrapper onClick={}> */}
-            <Btn>Confirm Payment</Btn>
+            <Link to={"/confirmation"} style={{ textDecoration: "none" }}>
+              <Btn>Confirm Payment</Btn>
+            </Link>
             {/* </BtnWrapper> */}
           </ContactWrapper>
         </PaymentContainer>
