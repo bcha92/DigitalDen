@@ -40,7 +40,7 @@ export const Cart = () => {
       if (item._id === itemId) {
         item.quantity -= 1;
         // Delete from Cart if Quantity is Zero
-        if (item.quantity === 0) {
+        if (item.quantity < 1) {
           cartItems.splice(index, 1);
         }
         localStorage.setItem("productInfo", JSON.stringify(cartItems));
@@ -73,8 +73,9 @@ export const Cart = () => {
             </ItemBar>
             <DivLine className="divHeader" />
 
-            {cartItems.map((item, index) => {
-              subtotal += item.price.slice(1) * item.quantity; // Subtotal Calculated with each item added
+            {cartItems.map((item) => {
+              subtotal += Number(item.price.slice(1)).toFixed(2) * item.quantity * 100 / 100 // Subtotal Calculated with each item added
+              // ^^ FLOTING POINT NUMBER FIX (WITH * 100 / 100) // DO NOT ALTER UNLESS MORE SUITABLE SOLUTION IS PROVIDED
               return (
                   <ItemBar key={item._id}>
                     <LeftBar>
@@ -89,9 +90,10 @@ export const Cart = () => {
                         <span>{item.quantity}</span>
                         <div>
                           {/* Increment Quantity */}
-                          <button onClick={
-                            () => addQuantity(item._id)
-                          }>+</button>
+                          <button
+                            disabled={item.quantity >= item.numInStock ? true: false}
+                            onClick={() => addQuantity(item._id)}
+                          >+</button>
                           {/* Decrease Quantity: WARNING IF QUANTITY IS ZERO, ITEM IS REMOVED */}
                           <button onClick={
                             () => removeQuantity(item._id)
@@ -200,6 +202,11 @@ const QuantityWrap = styled.div`
 const B = styled.p`
   font-weight: bold;
   &.price {margin-left: 50px};
+`;
+
+const R = styled.span`
+  color: crimson;
+  font-style: italic;
 `;
 
 const DivLine = styled.div`

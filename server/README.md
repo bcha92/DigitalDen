@@ -8,7 +8,7 @@
 |`/brands/:_id`|GET|Get a list of all products filtered by brand name|
 |`/products`|GET|Get a list of all products (entire JSON parsed array of items.json)|
 |`/products/:_id`|GET|Get a single product from a list of all products|
-|`/products/:_id`|PATCH|Decreases the Product Quantity By 1 (item is purchased)|
+|`/products/:_id`|PATCH| Handles the purchase and updates quantities of items |
 |`/category`|GET|Get a list of all categories|
 |`/category/:categoryname`|GET|Get a list of products filtered by category name|
 

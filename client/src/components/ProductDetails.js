@@ -32,14 +32,20 @@ export const ProductDetails = () => {
     // Gets "productInfo" from localStorage and assigns to productArray
     const productArray = JSON.parse(localStorage.getItem("productInfo"));
 
+    // Has the item been found in the array?
     let itemFound = false;
+
     // Iterates forEach to see if product already exist in productArray
-    productArray.forEach((item, index) => {
-      console.log(item);
+    productArray.forEach((item) => {
       // If it does exist, it simply increments the item quantity by 1
       if (item._id === product._id) {
-        item.quantity += 1;
-        itemFound = true;
+        if (item.quantity < product.numInStock) {
+          item.quantity++;
+          itemFound = true;
+        }
+        else {
+          itemFound = true; // Ensures, a second identical item is not added
+        }
       }
     })
     // If item is NOT found, product with 1 quantity is pushed
@@ -50,6 +56,18 @@ export const ProductDetails = () => {
     // Once finished, array is set into local storage
     localStorage.setItem("productInfo", JSON.stringify(productArray));
   };
+
+  // Disable "Add to Cart" if Cart emptied out this inventory
+  const disableOnFull = (id) => {
+    let disableOnFull = false;
+    let cart = JSON.parse(localStorage.getItem("productInfo"));
+    cart.forEach((item) => {
+      if (item._id == id && item.quantity >= product.numInStock) {
+        disableOnFull = true;
+      }
+    })
+    return disableOnFull;
+  }
 
   return (
     <Wrapper>
@@ -66,9 +84,15 @@ export const ProductDetails = () => {
             <h3>Number of Stock: {product.numInStock}</h3>
             {product.numInStock > 0 && (
               <Link to="/cart">
-                <Button onClick={handleClick}>Add to cart</Button>
+                <Button
+                  onClick={handleClick}
+                  disabled={disableOnFull(_id) ?
+                    true: false
+                  }
+                >Add to cart</Button>
               </Link>
             )}
+            {disableOnFull(_id) && <R>Unable to add to cart. All remaining stock has been added to cart.</R>}
           </Container2>
         </>
       ) : (
@@ -133,4 +157,13 @@ const Button = styled.button`
     background-color: #555555;
     color: white;
   }
+  &:disabled {
+    display: none;
+  };
+`;
+
+const R = styled.span`
+  color: red;
+  font-style: italic;
+  margin-top: 10px;
 `;
