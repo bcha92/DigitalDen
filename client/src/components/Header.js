@@ -27,9 +27,11 @@ export const Header = () => {
         <StyledNavLink exact to="/products">
           <List>Shop All</List>
         </StyledNavLink>
-        <List>
-          <ShoppingCart />
-        </List>
+        <StyledNavLink exact to="/cart">
+          <List>
+            <ShoppingCart />
+          </List>
+        </StyledNavLink>
       </NavMenu>
     </>
   );
