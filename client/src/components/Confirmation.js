@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { FiPrinter } from "react-icons/fi";
+
 export const Confirmation = (props) => {
   const cartItems = JSON.parse(localStorage.getItem("productInfo"));
   let subtotal = 0; // Subtotal Calculates the total amounts in the cart
@@ -13,6 +15,10 @@ export const Confirmation = (props) => {
   cartItems.map((item, index) => {
     subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item
   });
+
+  const printHandler = () => {
+    window.print();
+  };
 
   return (
     <Wrapper>
@@ -48,6 +54,12 @@ export const Confirmation = (props) => {
           </Delivery>
         </InfoBox>
         <ButtonDiv>
+          <PrintContainer>
+            <Button onClick={printHandler}>
+              <PrintLogo />
+              PRINT RECEIPT
+            </Button>
+          </PrintContainer>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <Button>Shop Again</Button>
           </Link>
@@ -73,7 +85,7 @@ const Form = styled.div`
   padding: 20px;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  height: 60vh;
+  height: 70vh;
   width: 60vw;
 `;
 
@@ -169,7 +181,7 @@ const Delivery = styled.div`
 
 const ButtonDiv = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -183,7 +195,7 @@ const Button = styled.div`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 40px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
 
@@ -191,4 +203,15 @@ const Button = styled.div`
     background-color: #555555;
     color: white;
   }
+`;
+
+const PrintContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const PrintLogo = styled(FiPrinter)`
+  margin-right: 7px;
+  margin-bottom: -2px;
 `;
