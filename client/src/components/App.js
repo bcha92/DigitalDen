@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Header } from "./Header";
-// import { Footer } from "./Footer";
+import { Footer } from "./Footer";
 import { AllBrands } from "./AllBrands";
 import { Homepage } from "./Homepage";
 import { AllProducts } from "./AllProducts";
@@ -9,10 +9,11 @@ import { ProductDetails } from "./ProductDetails";
 import { Category } from "./Category";
 import { Checkout } from "./Checkout";
 import { BrandProduct } from "./BrandProduct";
-// import { SearchBar } from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
-import { Confirmation } from "./Confirmation";
+import { Register } from "./RegsiterSignIn/Register";
+import { LogInOut } from "./RegsiterSignIn/LogInOut";
 
 const App = () => {
   return (
@@ -46,13 +47,16 @@ const App = () => {
         <Route exact path="/cart">
           <Cart />
         </Route>
-        <Route exact path="/confirmation">
-          <Confirmation />
+        <Route exact path="/register">
+          <Register />
+        </Route>
+        <Route exact path="/login">
+          <LogInOut />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>
       {/* <Footer /> */}
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
 
