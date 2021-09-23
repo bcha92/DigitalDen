@@ -24,8 +24,8 @@ export const SearchBar = () => {
       <SearchContainer>
         <div>
           <SearchInput
-            type="text"
-            placeholder="Search here"
+            type='text'
+            placeholder="Search the Den"
             onChange={(event) => setValue(event.target.value)}
           ></SearchInput>
           <i class="fas fa-backspace"></i>

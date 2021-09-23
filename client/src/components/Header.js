@@ -2,16 +2,37 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
-
 import { FaShoppingCart } from "react-icons/fa";
-
 import GlobalStyles from "./GlobalStyles";
 
-export const Header = () => {
+export const Header = ({ loginData, userLogIn, setLoginData }) => {
+
+  console.log(loginData, ' LOG IN DATA')
+  console.log(userLogIn.firs, ' user log in')
   return (
     <>
       <GlobalStyles />
-      {/* <SearchBar /> */}
+      <LogInRegisterContainer>
+        {loginData === undefined ?
+          <>
+            <LogInLink to="/login">
+              <button>Log In</button>
+            </LogInLink>
+            <RegisterLink to='/register'>
+              <button>Register</button>
+            </RegisterLink>
+          </> :
+          <>
+            <span>Welcome {loginData !== undefined && loginData.data.firstName}</span>
+
+            <LogInLink to="/login">
+              <button onClick={() => { setLoginData(undefined) }}>Log Out</button>
+            </LogInLink>
+          </>
+        }
+
+      </LogInRegisterContainer>
+      <SearchBar />
       <HomeNavLink exact to="/">
         <Title>DIGITALDEN</Title>
       </HomeNavLink>
@@ -77,4 +98,23 @@ const StyledNavLink = styled(NavLink)``;
 
 const ShoppingCart = styled(FaShoppingCart)`
   cursor: pointer;
+`;
+
+const LogInRegisterContainer = styled.div`
+float: right;
+margin-right: 20px;
+margin-top: 10px;
+top: 5px;
+`;
+
+const RegisterLink = styled(NavLink)`
+text-decoration: none;
+color: grey;
+`;
+
+const LogInLink = styled(NavLink)`
+text-decoration: none;
+margin-right: 20px;
+color: grey;
+
 `;

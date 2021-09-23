@@ -45,8 +45,12 @@ express()
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
 
+
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
+
+  .patch("/products", inventoryCheck, purchaseHandle)
+
 
   // Handles Inventory Check and Update on Purchase
   // req.body MUST BE AN ARRAY (i.e. LOCAL STORAGE SHOPPING CART)
@@ -57,11 +61,13 @@ express()
   // and "low-high" or "high-low" for prices
   .get("/sorted/:sortOrder", getSortedProducts)
 
+  // .patch("/products/:_id", updateProductPurchase)
+
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
 
-  .post("/users", addNewUser)
-  .post("/users/login", getUserById)
+  .post("/register", addNewUser)
+  .post("/login", getUserById)
 
   // ERROR Handler 404 Not Found
   .get("*", (req, res) => res.status(404).json(Error404))

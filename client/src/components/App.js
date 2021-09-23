@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -12,14 +12,19 @@ import { BrandProduct } from "./BrandProduct";
 import { SearchBar } from "./SearchBar";
 import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
-import { Register } from "./RegsiterSignIn/Register";
-import { LogInOut } from "./RegsiterSignIn/LogInOut";
-import { Confirmation } from "./Confirmation";
+import { Register } from "./RegisterSignIn/Register";
+import { LogInOut } from "./RegisterSignIn/LogInOut";
 
 const App = () => {
+  const [userLogIn, setUserLogIn] = useState({
+    email: "",
+    password: ""
+  });
+  const [loginData, setLoginData] = useState();
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header loginData={loginData} userLogIn={userLogIn} setLoginData={setLoginData} />
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -55,7 +60,7 @@ const App = () => {
           <Confirmation />
         </Route>
         <Route exact path="/login">
-          <LogInOut />
+          <LogInOut setLoginData={setLoginData} userLogIn={userLogIn} setUserLogIn={setUserLogIn} />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>
