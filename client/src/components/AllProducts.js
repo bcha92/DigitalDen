@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import SortDropdown from "./SortDropdown";
 // import CheckboxInStock from "./CheckboxInStock";
@@ -11,6 +12,8 @@ export const AllProducts = () => {
   const [products, setProducts] = useState();
   //will become true after the data from fetch as been stored
   const [isLoaded, setIsLoaded] = useState(false);
+
+  let history = useHistory();
 
   // Filtering products
   // const [filteredProducts, setFilteredProducts] = useState([]);
@@ -34,14 +37,22 @@ export const AllProducts = () => {
       });
   }, [sortType]);
 
-  // console.log(products, "this is products");
+  function handleClick(e, product) {
+    e.preventDefault();
+    if (localStorage.getItem("productInfo") === null) {
+      localStorage.setItem("productInfo", JSON.stringify([]));
+    }
+    let cart = JSON.parse(localStorage.getItem("productInfo"));
+    cart.push(product);
+    localStorage.setItem("productInfo", JSON.stringify(cart));
+    history.push("/cart");
+  }
 
   // This is coming from SortDropdown.js - onChangeHandler
   const handleChangeSortType = (event) => {
     setSortType(event.target.value);
   };
 
-  // Maybe delete this function as it is not being used anymore?
   const sortArr = (arr, type) => {
     if (arr.length === 0) {
       return arr;
@@ -125,8 +136,18 @@ export const AllProducts = () => {
                     <Img src={product.imageSrc} />
                     <p>{product.name}</p>
                     <p>{product.price}</p>
-                    {product.numInStock === 0 && (
+
+                    {product.numInStock === 0 ? (
                       <OutOfStock>OUT OF STOCK</OutOfStock>
+                    ) : (
+                      <Button
+                        onClick={(e) => {
+                          handleClick(e, product);
+                          // handleCart(e, product);
+                        }}
+                      >
+                        BUY NOW
+                      </Button>
                     )}
                   </Card>
                 </Link>
@@ -207,4 +228,7 @@ const OutOfStock = styled.div`
   font-size: 10px;
   padding: 10px;
   border-radius: 30px;
+`;
+const Button = styled(Link)`
+  margin-top: 10px;
 `;
