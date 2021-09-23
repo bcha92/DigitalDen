@@ -41,6 +41,7 @@ export const AllProducts = () => {
     setSortType(event.target.value);
   };
 
+  // Maybe delete this function as it is not being used anymore?
   const sortArr = (arr, type) => {
     if (arr.length === 0) {
       return arr;
@@ -113,25 +114,24 @@ export const AllProducts = () => {
       {isLoaded ? (
         <>
           <Container>
-            {sortArr &&
-              products.map((product) => {
-                return (
-                  <Link
-                    to={`/details/${product._id}`}
-                    style={{ textDecoration: "none" }}
-                    key={product._id}
-                  >
-                    <Card>
-                      <Img src={product.imageSrc} />
-                      <p>{product.name}</p>
-                      <p>{product.price}</p>
-                      {product.numInStock === 0 && (
-                        <OutOfStock>OUT OF STOCK</OutOfStock>
-                      )}
-                    </Card>
-                  </Link>
-                );
-              })}
+            {products.map((product) => {
+              return (
+                <Link
+                  to={`/details/${product._id}`}
+                  style={{ textDecoration: "none" }}
+                  key={product._id}
+                >
+                  <Card>
+                    <Img src={product.imageSrc} />
+                    <p>{product.name}</p>
+                    <p>{product.price}</p>
+                    {product.numInStock === 0 && (
+                      <OutOfStock>OUT OF STOCK</OutOfStock>
+                    )}
+                  </Card>
+                </Link>
+              );
+            })}
           </Container>
         </>
       ) : (
