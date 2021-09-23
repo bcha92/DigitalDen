@@ -14,17 +14,22 @@ import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
 import { Register } from "./RegisterSignIn/Register";
 import { LogInOut } from "./RegisterSignIn/LogInOut";
+import { Confirmation } from "./Confirmation";
 
 const App = () => {
   const [userLogIn, setUserLogIn] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const [loginData, setLoginData] = useState();
 
   return (
     <BrowserRouter>
-      <Header loginData={loginData} userLogIn={userLogIn} setLoginData={setLoginData} />
+      <Header
+        loginData={loginData}
+        userLogIn={userLogIn}
+        setLoginData={setLoginData}
+      />
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -60,7 +65,11 @@ const App = () => {
           <Confirmation />
         </Route>
         <Route exact path="/login">
-          <LogInOut setLoginData={setLoginData} userLogIn={userLogIn} setUserLogIn={setUserLogIn} />
+          <LogInOut
+            setLoginData={setLoginData}
+            userLogIn={userLogIn}
+            setUserLogIn={setUserLogIn}
+          />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>

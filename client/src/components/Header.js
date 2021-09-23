@@ -6,33 +6,39 @@ import { FaShoppingCart } from "react-icons/fa";
 import GlobalStyles from "./GlobalStyles";
 
 export const Header = ({ loginData, userLogIn, setLoginData }) => {
-
-  console.log(loginData, ' LOG IN DATA')
-  console.log(userLogIn.firs, ' user log in')
+  console.log(loginData, " LOG IN DATA");
+  console.log(userLogIn.firs, " user log in");
   return (
     <>
       <GlobalStyles />
       <LogInRegisterContainer>
-        {loginData === undefined ?
+        {loginData === undefined ? (
           <>
             <LogInLink to="/login">
-              <button>Log In</button>
+              <Button>Log In</Button>
             </LogInLink>
-            <RegisterLink to='/register'>
-              <button>Register</button>
+            <RegisterLink to="/register">
+              <Button>Register</Button>
             </RegisterLink>
-          </> :
+          </>
+        ) : (
           <>
-            <span>Welcome {loginData !== undefined && loginData.data.firstName}</span>
+            <span>
+              Welcome {loginData !== undefined && loginData.data.firstName}
+            </span>
 
             <LogInLink to="/login">
-              <button onClick={() => { setLoginData(undefined) }}>Log Out</button>
+              <Button
+                onClick={() => {
+                  setLoginData(undefined);
+                }}
+              >
+                Log Out
+              </Button>
             </LogInLink>
           </>
-        }
-
+        )}
       </LogInRegisterContainer>
-      <SearchBar />
       <HomeNavLink exact to="/">
         <Title>DIGITALDEN</Title>
       </HomeNavLink>
@@ -101,20 +107,23 @@ const ShoppingCart = styled(FaShoppingCart)`
 `;
 
 const LogInRegisterContainer = styled.div`
-float: right;
-margin-right: 20px;
-margin-top: 10px;
-top: 5px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+  top: 5px;
 `;
 
 const RegisterLink = styled(NavLink)`
-text-decoration: none;
-color: grey;
+  text-decoration: none;
+  color: grey;
 `;
 
 const LogInLink = styled(NavLink)`
-text-decoration: none;
-margin-right: 20px;
-color: grey;
-
+  text-decoration: none;
+  margin-right: 20px;
+  color: grey;
+`;
+const Button = styled.button`
+  border: none;
+  background: transparent;
 `;
