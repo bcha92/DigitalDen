@@ -24,7 +24,7 @@ export const SearchBar = () => {
       <SearchContainer>
         <div>
           <SearchInput
-            type='text'
+            type="text"
             placeholder="Search the Den"
             onChange={(event) => setValue(event.target.value)}
           ></SearchInput>
