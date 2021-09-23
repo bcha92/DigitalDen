@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <>
       <GlobalStyles />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <HomeNavLink exact to="/">
         <Title>DIGITALDEN</Title>
       </HomeNavLink>
@@ -32,6 +32,7 @@ export const Header = () => {
             <ShoppingCart />
           </List>
         </StyledNavLink>
+        <SearchBar />
       </NavMenu>
     </>
   );
@@ -55,6 +56,7 @@ const NavMenu = styled.ul`
   text-transform: uppercase;
   margin-top: 80px;
   justify-content: center;
+  align-items: center;
 `;
 
 const List = styled.li`

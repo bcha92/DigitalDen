@@ -98,9 +98,9 @@ export const AllProducts = () => {
 
   return (
     <Wrapper>
-      {/* <Title>
+      <Title>
         <h1>All Products</h1>
-      </Title> */}
+      </Title>
       {/* <CheckboxContainer>
         <CheckboxInStock
           onChangeHandler={handleStockProducts}
@@ -193,8 +193,12 @@ const SortContainer = styled.div`
 // `;
 
 const Title = styled.div`
+  /* display: flex;
+  justify-content: center; */
   display: flex;
   justify-content: center;
+  margin: 50px 0;
+  font-size: 25px;
 `;
 
 const OutOfStock = styled.div`

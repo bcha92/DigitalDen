@@ -57,6 +57,8 @@ const Wrapper = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
+  margin: 50px 0;
+  font-size: 25px;
 `;
 const Container = styled.div`
   display: flex;
