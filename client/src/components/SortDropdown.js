@@ -10,10 +10,10 @@ export const SortDropdown = ({ onChangeHandler }) => {
         <option value="" disabled selected>
           Select Sort Option
         </option>
-        <option value="priceLowToHight">Price - Lowest to Highest</option>
-        <option value="priceHightToLow">Price - Highest to Lowest</option>
-        <option value="AtoZ">Name - A to Z</option>
-        <option value="ZtoA">Name - Z to A</option>
+        <option value="low-high">Price - Lowest to Highest</option>
+        <option value="high-low">Price - Highest to Lowest</option>
+        <option value="a-z">Name - A to Z</option>
+        <option value="z-a">Name - Z to A</option>
       </Select>
     </Div>
   );
