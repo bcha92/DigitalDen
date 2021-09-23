@@ -32,7 +32,7 @@ export const Homepage = () => {
       <HeadingBrand>Popular Brands</HeadingBrand>
       <Wrapper>
         <Row>
-          <Link to="/brands?brand=Casio">
+          <Link to="/brands/13334">
             <ImgContainer>
               <Img
                 style={{
@@ -44,7 +44,7 @@ export const Homepage = () => {
               />
             </ImgContainer>
           </Link>
-          <Link to="/brands?brand=Fitbit">
+          <Link to="/brands/10759">
             <ImgContainer>
               <Img
                 style={{ width: "216px", height: "50px" }}
@@ -53,7 +53,7 @@ export const Homepage = () => {
               />
             </ImgContainer>
           </Link>
-          <Link to="/brands?brand=Nike">
+          <Link to="/brands/11939">
             <ImgContainer>
               <Img
                 style={{ width: "180px", height: "120px" }}
@@ -64,7 +64,7 @@ export const Homepage = () => {
           </Link>
         </Row>
         <Row>
-          <Link to="/brands?brand=Polar">
+          <Link to="/brands/11837">
             <ImgContainer>
               <Img
                 style={{ width: "216px", height: "120px" }}
@@ -73,7 +73,7 @@ export const Homepage = () => {
               />
             </ImgContainer>
           </Link>
-          <Link to="/brands?brand=Tomtom">
+          <Link to="/brands/18324">
             <ImgContainer>
               <Img
                 style={{ width: "216px", height: "64px" }}
