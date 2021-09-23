@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-export const Register = (req, res) => {
+export const Register = () => {
     // variable to hold page route using history
     const formHistory = useHistory();
 
@@ -27,7 +27,7 @@ export const Register = (req, res) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        fetch('/users', {
+        fetch('/register', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -57,6 +57,7 @@ export const Register = (req, res) => {
                             placeholder="First Name"
                             name="firstName"
                             id="firstName"
+                            // required
                             value={userRegistration.firstName}
                             onChange={handleInput} >
                         </Input>
@@ -99,7 +100,6 @@ export const Register = (req, res) => {
                     </BtnContainer>
                 </div>
             </Form>
-
         </>
     );
 };

@@ -5,6 +5,7 @@ import { Footer } from "./Footer";
 
 export const AllBrands = () => {
   const [brand, setBrand] = useState([]);
+
   // Button - View more
   const [visible, setVisible] = useState(6);
   // const [status, setStatus] = useState("loading")
