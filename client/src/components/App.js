@@ -14,6 +14,7 @@ import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
 import { Register } from "./RegsiterSignIn/Register";
 import { LogInOut } from "./RegsiterSignIn/LogInOut";
+import { Confirmation } from "./Confirmation";
 
 const App = () => {
   return (
@@ -50,13 +51,16 @@ const App = () => {
         <Route exact path="/register">
           <Register />
         </Route>
+        <Route exact path="/confirmation">
+          <Confirmation />
+        </Route>
         <Route exact path="/login">
           <LogInOut />
         </Route>
         <Route path="">404: Oops!</Route>
       </Switch>
       {/* <Footer /> */}
-    </BrowserRouter >
+    </BrowserRouter>
   );
 };
 

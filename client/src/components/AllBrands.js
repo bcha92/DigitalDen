@@ -25,7 +25,9 @@ export const AllBrands = () => {
 
   return (
     <>
-      <Title>All brands</Title>
+      <Title>
+        <h1>All brands</h1>
+      </Title>
 
       <Container>
         {brand.slice(0, visible).map((item, brandName) => {
@@ -49,12 +51,16 @@ export const AllBrands = () => {
 };
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 50%;
   align-items: center;
-  margin-left: 430px;
+  margin-left: 430px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 // max-width: 1000px;
 
@@ -72,9 +78,15 @@ const BrandText = styled.div`
   margin-left: 70px;
 `;
 
-const Title = styled.h2`
-  text-align: center;
-  color: black;
+// const Title = styled.h2`
+//   text-align: center;
+//   color: black;
+// `;
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+  font-size: 25px;
 `;
 
 const BrandLink = styled(Link)`
