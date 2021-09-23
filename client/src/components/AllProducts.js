@@ -23,7 +23,7 @@ export const AllProducts = () => {
 
   //retrieve all products
   useEffect(() => {
-    fetch(`/products`)
+    fetch(sortType.length < 1 ? "/products/" : `/sorted/${sortType}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data);
@@ -32,7 +32,7 @@ export const AllProducts = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [sortType]);
 
   // console.log(products, "this is products");
 
