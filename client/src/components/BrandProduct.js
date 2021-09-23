@@ -31,17 +31,39 @@ export const BrandProduct = () => {
       <Title>Products for {brandName.name}</Title>
 
       {isLoaded ? (
-        brand.map((item) => {
-          return (
-            <Link key={item._id} to={`/details/${item._id}`}>
-              <ProductContainer>
-                <ItemName>{item.name}</ItemName>
-                <ItemPrice>{item.price}</ItemPrice>
-                <ItemImg src={item.imageSrc}></ItemImg>
-              </ProductContainer>
-            </Link>
-          );
-        })
+        // brand.map((item) => {
+        //   return (
+        //     <Link key={item._id} to={`/details/${item._id}`}>
+        //       <ProductContainer>
+        //         <ItemName>{item.name}</ItemName>
+        //         <ItemPrice>{item.price}</ItemPrice>
+        //         <ItemImg src={item.imageSrc}></ItemImg>
+        //       </ProductContainer>
+        //     </Link>
+        //   );
+        // })
+        <>
+          <Container>
+            {brand.map((item) => {
+              return (
+                <Link
+                  key={item._id}
+                  to={`/details/${item._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card>
+                    <Img src={item.imageSrc} />
+                    <p>{item.name}</p>
+                    <p>{item.price}</p>
+                    {item.numInStock === 0 && (
+                      <OutOfStock>OUT OF STOCK</OutOfStock>
+                    )}
+                  </Card>
+                </Link>
+              );
+            })}
+          </Container>
+        </>
       ) : (
         <h1>Loading...</h1>
       )}
@@ -49,10 +71,10 @@ export const BrandProduct = () => {
   );
 };
 
-const Title = styled.h2`
-  color: black;
-  text-align: center;
-`;
+// const Title = styled.h2`
+//   color: black;
+//   text-align: center;
+// `;
 
 const ProductContainer = styled.div`
   display: flex;
@@ -77,4 +99,61 @@ const ItemPrice = styled.span`
 
 const ItemImg = styled.img`
   height: 100px;
+`;
+
+const Img = styled.img`
+  height: 100px;
+  width: 100px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SortContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-bottom: 2rem;
+  margin-right: 10rem;
+`;
+
+// const CheckboxContainer = styled.div`
+//   margin-top: 4rem;
+//   margin-right: 30rem;
+//   justify-content: flex-end;
+//   margin-bottom: -1.4rem;
+//   display: flex;
+//   flex-wrap: wrap;
+// `;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const OutOfStock = styled.div`
+  background-color: #1313dd;
+  color: white;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 30px;
+`;
+const Card = styled.div`
+  background-color: white;
+  height: 250px;
+  width: 250px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid white;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 5px 5px 4px #888888;
+  border-radius: 20px;
+  color: black;
 `;
