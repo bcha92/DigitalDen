@@ -9,6 +9,7 @@ const { getBrands, getProductsByBrand } = require("./brandHandlers");
 const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
 const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
+const { getSortedProducts } = require("./sortedHandlers");
 const { Error404 } = require("./ErrorHandler");
 
 const PORT = 4000;
@@ -45,6 +46,11 @@ express()
   .get("/category/:categoryname", getProductsByCategory)
   
   .patch("/products", inventoryCheck, purchaseHandle)
+
+  // Sorted Products
+  // :sortorder only accept "a-z", "z-a" for alphabet
+  // and "low-high" or "high-low" for prices
+  .get("/sorted/:sortOrder", getSortedProducts)
   // ERROR Handler 404 Not Found
   .get("*", (req, res) => res.status(404).json(Error404))
 
