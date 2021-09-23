@@ -8,17 +8,9 @@ const morgan = require("morgan");
 const { getBrands, getProductsByBrand } = require("./brandHandlers");
 const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
-
-
-const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
-
 const { getSortedProducts } = require("./sortedHandlers");
 
-const { addNewUser, getUserById } = require("./UserHandlers");
-
-
 const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
-
 const { addNewUser, getUserById } = require("./UserHandlers");
 
 const { Error404 } = require("./ErrorHandler");
@@ -53,20 +45,17 @@ express()
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
 
-  
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
-  
+
+  // Handles Inventory Check and Update on Purchase
+  // req.body MUST BE AN ARRAY (i.e. LOCAL STORAGE SHOPPING CART)
   .patch("/products", inventoryCheck, purchaseHandle)
-
-
 
   // Sorted Products
   // :sortorder only accept "a-z", "z-a" for alphabet
   // and "low-high" or "high-low" for prices
   .get("/sorted/:sortOrder", getSortedProducts)
-
-  .patch("/products/:_id", updateProductPurchase)
 
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
