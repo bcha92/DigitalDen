@@ -9,9 +9,15 @@ const { getBrands, getProductsByBrand } = require("./brandHandlers");
 const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
 
+
 const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
 
 const { getSortedProducts } = require("./sortedHandlers");
+
+const { addNewUser, getUserById } = require("./UserHandlers");
+
+
+const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
 
 const { addNewUser, getUserById } = require("./UserHandlers");
 
@@ -46,11 +52,13 @@ express()
 
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
+
   
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
   
   .patch("/products", inventoryCheck, purchaseHandle)
+
 
 
   // Sorted Products
