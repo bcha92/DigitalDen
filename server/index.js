@@ -8,8 +8,13 @@ const morgan = require("morgan");
 const { getBrands, getProductsByBrand } = require("./brandHandlers");
 const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
+
 const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
+
 const { getSortedProducts } = require("./sortedHandlers");
+
+const { addNewUser, getUserById } = require("./UserHandlers");
+
 const { Error404 } = require("./ErrorHandler");
 
 const PORT = 4000;
@@ -31,14 +36,14 @@ express()
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
-  
-    // EXAMPLE // FOR INSOMNIA TESTING ONLY!!!
-    // .get("/bacon", (req, res) => res.status(200).json("🥓"))
+
+  // EXAMPLE // FOR INSOMNIA TESTING ONLY!!!
+  // .get("/bacon", (req, res) => res.status(200).json("🥓"))
 
   // REST endpoints // SEE each Handler in various "...handlers.js" files for Information and Descriptions
   .get("/brands", getBrands)
   .get("/brands/:_id", getProductsByBrand)
-  
+
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
   
@@ -47,10 +52,20 @@ express()
   
   .patch("/products", inventoryCheck, purchaseHandle)
 
+
   // Sorted Products
   // :sortorder only accept "a-z", "z-a" for alphabet
   // and "low-high" or "high-low" for prices
   .get("/sorted/:sortOrder", getSortedProducts)
+
+  .patch("/products/:_id", updateProductPurchase)
+
+  .get("/category", getCategories)
+  .get("/category/:categoryname", getProductsByCategory)
+
+  .post("/users", addNewUser)
+  .post("/users/login", getUserById)
+
   // ERROR Handler 404 Not Found
   .get("*", (req, res) => res.status(404).json(Error404))
 
