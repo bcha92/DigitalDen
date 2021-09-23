@@ -5,7 +5,13 @@ import { Footer } from "./Footer";
 
 export const AllBrands = () => {
   const [brand, setBrand] = useState([]);
+  // Button - View more
+  const [visible, setVisible] = useState(6);
   // const [status, setStatus] = useState("loading")
+
+  const showMoreItems = () => {
+    setVisible((prevValue) => prevValue + 12);
+  };
 
   // fetching data to receive all brands
   useEffect(() => {
@@ -20,8 +26,9 @@ export const AllBrands = () => {
   return (
     <>
       <Title>All brands</Title>
+
       <Container>
-        {brand.map((item) => {
+        {brand.slice(0, visible).map((item, brandName) => {
           return (
             <BrandLink key={item._id} to={`/brands/${item._id}`}>
               <BrandText>
@@ -30,6 +37,11 @@ export const AllBrands = () => {
             </BrandLink>
           );
         })}
+      </Container>
+      <Container>
+        <Link to="/brands">
+          <ListItem onClick={showMoreItems}>View More</ListItem>
+        </Link>
       </Container>
       <Footer />
     </>
@@ -40,10 +52,11 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  width: 50%;
   align-items: center;
-  margin-right: 25px; ;
+  margin-left: 430px;
 `;
+// max-width: 1000px;
 
 const BrandText = styled.div`
   background-color: white;
@@ -72,4 +85,17 @@ const BrandLink = styled(Link)`
 const Text = styled.h3`
   align-items: center;
   margin-left: 70px;
+`;
+
+const ListItem = styled.button`
+  margin-left: 30px;
+  border: none;
+  outline: none;
+  width: 120%;
+  cursor: pointer;
+  padding: 15px 10px;
+  margin-top: 50px;
+  border-radius: 5px;
+  background-color: #d1d1d1;
+  font-family: "Oswald", sans-serif;
 `;
