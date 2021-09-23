@@ -45,4 +45,5 @@ const purchaseHandle = async (req, res) => {
     }
 };
 
+// Module Exports
 module.exports = { inventoryCheck, purchaseHandle };

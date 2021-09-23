@@ -8,12 +8,19 @@ const morgan = require("morgan");
 const { getBrands, getProductsByBrand } = require("./brandHandlers");
 const { getProducts, getProductById } = require("./productHandlers");
 const { getCategories, getProductsByCategory } = require("./categoryHandlers");
-<<<<<<< Updated upstream
+
+
 const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
-=======
+
+const { getSortedProducts } = require("./sortedHandlers");
+
 const { addNewUser, getUserById } = require("./UserHandlers");
 
->>>>>>> Stashed changes
+
+const { inventoryCheck, purchaseHandle } = require("./purchaseHandlers");
+
+const { addNewUser, getUserById } = require("./UserHandlers");
+
 const { Error404 } = require("./ErrorHandler");
 
 const PORT = 4000;
@@ -45,13 +52,20 @@ express()
 
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
-<<<<<<< Updated upstream
+
   
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
   
   .patch("/products", inventoryCheck, purchaseHandle)
-=======
+
+
+
+  // Sorted Products
+  // :sortorder only accept "a-z", "z-a" for alphabet
+  // and "low-high" or "high-low" for prices
+  .get("/sorted/:sortOrder", getSortedProducts)
+
   .patch("/products/:_id", updateProductPurchase)
 
   .get("/category", getCategories)
@@ -60,7 +74,6 @@ express()
   .post("/users", addNewUser)
   .post("/users/login", getUserById)
 
->>>>>>> Stashed changes
   // ERROR Handler 404 Not Found
   .get("*", (req, res) => res.status(404).json(Error404))
 

@@ -11,6 +11,10 @@
 |`/products/:_id`|PATCH| Handles the purchase and updates quantities of items |
 |`/category`|GET|Get a list of all categories|
 |`/category/:categoryname`|GET|Get a list of products filtered by category name|
+|`/sorted/a-z`|GET| Get a list of products sorted alphabetically
+|`/sorted/z-a`|GET| Get a list of products sorted alphabetically (reversed)
+|`/sorted/low-high`|GET| Get a list of products sorted by price (low to high)
+|`/sorted/high-low`|GET| Get a list of products sorted by price (high to low)
 
 ### Examples of Endpoint Use
 - NOTE: JSON examples has been modified with (...) to shorten actual results as they contain image sources that may exceed several pages as a result.
