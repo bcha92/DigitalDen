@@ -87,7 +87,7 @@ export const ProductDetails = () => {
               <ProductInfo>Price: {product.price}</ProductInfo>
             </InfoContainer>
             {/* <h3>Number of Stock: {product.numInStock}</h3> */}
-            {product.numInStock > 0 && (
+            {product.numInStock > 0 ? (
               <Link to="/cart">
                 <Button
                   onClick={handleClick}
@@ -96,6 +96,8 @@ export const ProductDetails = () => {
                   Add to cart
                 </Button>
               </Link>
+            ) : (
+              <OutOfStock>OUT OF STOCK</OutOfStock>
             )}
             {disableOnFull(_id) && (
               <R>
@@ -135,9 +137,10 @@ const Container2 = styled.div`
   width: 400px;
   font-family: "Oswald", sans-serif;
   border-radius: 20px;
-  background-color: #b9b7b7;
+  background-color: #e9e8e8;
   margin-left: 100px;
   text-align: center;
+  padding: 30px;
 `;
 
 const Img = styled.img`
@@ -146,23 +149,27 @@ const Img = styled.img`
 `;
 
 const Button = styled.button`
-  background-color: white;
+  margin-top: 10px;
+  background-color: #ffa41c;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 10px 50px;
+  border-radius: 30px;
   border: none;
-  color: #555555;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 25px;
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
 
   &:hover {
-    background-color: #555555;
-    color: white;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    background-color: #e6961e;
   }
   &:disabled {
     display: none;
@@ -182,4 +189,13 @@ const ProductInfo = styled.h3`
 
 const InfoContainer = styled.div`
   margin-top: 70px;
+`;
+const OutOfStock = styled.div`
+  background-color: #ababab;
+  color: white;
+  font-size: 10px;
+  margin: 25px auto;
+  padding: 10px 50px;
+  border-radius: 30px;
+  width: 170px;
 `;
