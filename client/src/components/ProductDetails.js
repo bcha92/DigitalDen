@@ -20,7 +20,7 @@ export const ProductDetails = () => {
     fetch(`/products/${_id}`)
       .then((res) => res.json())
       .then((data) => {
-        setProduct({...data.data, quantity: 1});
+        setProduct({ ...data.data, quantity: 1 });
         setIsLoaded(true);
       })
       .catch((error) => {
@@ -81,22 +81,24 @@ export const ProductDetails = () => {
             <Img src={product.imageSrc} />
           </Container1>
           <Container2>
-            <h2>{product.name}</h2>
-            <h3>Category: {product.category}</h3>
-            <h3>Body Location: {product.body_location}</h3>
-            <h3>Price: {product.price}</h3>
-            <h3>Number of Stock: {product.numInStock}</h3>
+            <InfoContainer>
+              <ProductInfo>{product.name}</ProductInfo>
+              <ProductInfo>Category: {product.category}</ProductInfo>
+              <ProductInfo>Body Location: {product.body_location}</ProductInfo>
+              <ProductInfo>Price: {product.price}</ProductInfo>
+            </InfoContainer>
+            {/* <h3>Number of Stock: {product.numInStock}</h3> */}
             {product.numInStock > 0 && (
               <Link to="/cart">
                 <Button
                   onClick={handleClick}
                   disabled={disableOnFull(_id) ?
-                    true: false
+                    true : false
                   }
                 >Add to cart</Button>
               </Link>
             )}
-            {disableOnFull(_id) && <R>Unable to add to cart. All remaining stock has been added to cart.</R>}
+            {disableOnFull(_id) && <R>Unable to add to cart.All remaining stock has been added to cart.</R>}
           </Container2>
         </>
       ) : (
@@ -131,10 +133,11 @@ const Container2 = styled.div`
   border-radius: 20px;
   background-color: #b9b7b7;
   margin-left: 100px;
-  display: flex;
+  /* margin-top: 25px; */
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   text-align: center;
 `;
 
@@ -156,6 +159,7 @@ const Button = styled.button`
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 25px;
 
   &:hover {
     background-color: #555555;
@@ -171,3 +175,13 @@ const R = styled.span`
   font-style: italic;
   margin-top: 10px;
 `;
+
+const ProductInfo = styled.h3`
+margin-top: 35px;
+font-style: var(--heading-font-family);
+
+`
+
+const InfoContainer = styled.div`
+margin-top: 70px;
+`

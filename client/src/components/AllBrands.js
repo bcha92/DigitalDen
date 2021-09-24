@@ -23,15 +23,16 @@ export const AllBrands = () => {
         // setStatus("loading complete")
       });
   }, []);
+  console.log(brand, ' THIS IS BRAND')
+
 
   return (
     <>
       <Title>
         <h1>All brands</h1>
       </Title>
-
       <Container>
-        {brand.slice(0, visible).map((item, brandName) => {
+        {brand.sort((a, b) => (a.name > b.name ? 1 : -1)).slice(0, visible).map((item, brandName) => {
           return (
             <BrandLink key={item._id} to={`/brands/${item._id}`}>
               <BrandText>

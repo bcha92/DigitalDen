@@ -14,7 +14,7 @@ import { CategoryProduct } from "./CategoryProduct";
 import { Cart } from "./Cart";
 import { Register } from "./RegisterSignIn/Register";
 import { LogInOut } from "./RegisterSignIn/LogInOut";
-import { Confirmation} from "./Confirmation";
+import { Confirmation } from "./Confirmation";
 
 const App = () => {
   const [userLogIn, setUserLogIn] = useState({
