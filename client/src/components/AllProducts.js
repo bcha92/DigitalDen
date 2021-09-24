@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+=======
+import { NavLink } from "react-router-dom";
+>>>>>>> Stashed changes
 
 import SortDropdown from "./SortDropdown";
 // import CheckboxInStock from "./CheckboxInStock";
@@ -75,43 +79,25 @@ export const AllProducts = () => {
       {isLoaded ? (
         <>
           <Container>
-            {products.map((product) => {
-              return (
-                <Link
-                  to={`/details/${product._id}`}
-                  style={{ textDecoration: "none" }}
-                  key={product._id}
-                >
-                  <Card>
-                    <Img src={product.imageSrc} />
-                    <p
-                      style={{
-                        margin: "10px",
-                        fontWeight: "bold",
-                        textAlign: "center",
-                      }}
-                    >
-                      {product.name}
-                    </p>
-                    <p>{product.price}</p>
-
-                    {product.numInStock === 0 ? (
-                      <OutOfStock>OUT OF STOCK</OutOfStock>
-                    ) : (
-                      <Button
-                        onClick={(e) => {
-                          handleClick(e, product);
-                        }}
-                        style={{ textDecoration: "none" }}
-                      >
-                        {/* One-Click Buy */}
-                        BUY NOW
-                      </Button>
-                    )}
-                  </Card>
-                </Link>
-              );
-            })}
+            {sortArr &&
+              products.map((product) => {
+                return (
+                  <ProductLink
+                    to={`/details/${product._id}`}
+                    style={{ textDecoration: "none" }}
+                    key={product._id}
+                  >
+                    <Card>
+                      <Img src={product.imageSrc} />
+                      <ProductName>{product.name}</ProductName>
+                      <ProductPrice>{product.price}</ProductPrice>
+                      {product.numInStock === 0 && (
+                        <OutOfStock>OUT OF STOCK</OutOfStock>
+                      )}
+                    </Card>
+                  </ProductLink>
+                );
+              })}
           </Container>
         </>
       ) : (
@@ -153,6 +139,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  
 `;
 
 const SortContainer = styled.div`
@@ -196,4 +183,21 @@ const Button = styled(Link)`
   font-size: 10px;
   padding: 10px;
   border-radius: 30px;
+`;
+
+const ProductLink = styled(NavLink)`
+&:hover {
+  color: red
+}
+&:visited {
+    color: none;
+  }
+`
+
+const ProductName = styled.span`
+
+`;
+
+const ProductPrice = styled.span`
+
 `;

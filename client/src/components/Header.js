@@ -93,7 +93,7 @@ const List = styled.li`
   padding-right: 30px;
 
   &:hover {
-    color: blue;
+    color: grey;
   }
   &:visited {
     color: none;

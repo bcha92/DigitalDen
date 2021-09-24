@@ -41,10 +41,8 @@ export const BrandProduct = () => {
   }
 
   return (
-    <>
-      <Title>
-        <h1>Products for {brandName.name}</h1>
-      </Title>
+    <Container>
+      <Title>Products for {brandName.name}</Title>
 
       {isLoaded ? (
         // brand.map((item) => {
@@ -59,7 +57,7 @@ export const BrandProduct = () => {
         //   );
         // })
         <>
-          <Container>
+          <Wrapper>
             {brand.map((item) => {
               return (
                 <Link
@@ -98,12 +96,12 @@ export const BrandProduct = () => {
                 </Link>
               );
             })}
-          </Container>
+          </Wrapper>
         </>
       ) : (
         <h1>Loading...</h1>
       )}
-    </>
+    </Container>
   );
 };
 
@@ -142,11 +140,12 @@ const Img = styled.img`
   width: 100px;
 `;
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 `;
 
 const SortContainer = styled.div`
@@ -166,8 +165,9 @@ const SortContainer = styled.div`
 //   flex-wrap: wrap;
 // `;
 
-const Title = styled.div`
+const Title = styled.h1`
   display: flex;
+  font-size: 20px;
   justify-content: center;
   margin: 50px 0;
   font-size: 25px;
@@ -204,3 +204,7 @@ const Button = styled.div`
   padding: 10px;
   border-radius: 30px;
 `;
+
+const Container = styled.div`
+margin-top: 40px;
+`

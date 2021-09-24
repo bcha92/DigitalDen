@@ -30,7 +30,7 @@ export const SearchBar = () => {
           ></SearchInput>
           <i class="fas fa-backspace"></i>
         </div>
-        <SuggestionContainer>
+        <SuggestionContainer >
           {value.length > 1 && (
             <UnorderedList>
               {inputValue
@@ -50,7 +50,7 @@ export const SearchBar = () => {
                             value.indexOf(value[value.length - 1])
                           )}
                         </ResultText>
-                        ∆{" "}
+                        {" "}
                       </SuggestionList>
                     </DetailLink>
                   );
@@ -67,7 +67,7 @@ const SearchContainer = styled.div`
   float: right;
   /* margin-top: 50px; */
   display: flex;
-  height: "500px";
+  /* height: 500px; */
   position: relative;
 `;
 
@@ -88,6 +88,7 @@ const SuggestionList = styled.li`
   padding: 10px 0;
   margin-right: 100px;
   width: 100%;
+  text-overflow: ellipsis;
 
   &:hover {
     background-color: #fff8dc;
@@ -101,10 +102,9 @@ const UnorderedList = styled.ul`
   width: 295px;
   float: right;
   background-color: white;
-  /* margin-left: 53vw; */
   border: 2px solid black;
   border-bottom: 1px solid black;
-  height: 300px;
+  /* height: 300px; */
   text-align: left;
   border-radius: 4px;
   overflow-y: scroll;
