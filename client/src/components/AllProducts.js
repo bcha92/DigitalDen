@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-=======
-import { NavLink } from "react-router-dom";
->>>>>>> Stashed changes
 
 import SortDropdown from "./SortDropdown";
-// import CheckboxInStock from "./CheckboxInStock";
 
 //This page will show all products from the store.
 export const AllProducts = () => {
@@ -18,12 +13,6 @@ export const AllProducts = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   let history = useHistory();
-
-  // Filtering products
-  // const [filteredProducts, setFilteredProducts] = useState([]);
-
-  // Checkbox
-  // const { isCheckboxInStock, setIsCheckboxInStock } = useState(false);
 
   // Sorting type option
   const [sortType, setSortType] = useState("");
@@ -57,47 +46,55 @@ export const AllProducts = () => {
     setSortType(event.target.value);
   };
 
-  // CheckBox Stock
-  // const handleStockProducts = () => {
-  //   setIsCheckboxInStock((isCheckboxInStock) => !isCheckboxInStock);
-  // };
-
   return (
     <Wrapper>
       <Title>
         <h1>All Products</h1>
       </Title>
-      {/* <CheckboxContainer>
-        <CheckboxInStock
-          onChangeHandler={handleStockProducts}
-          isCheckboxInStock={isCheckboxInStock}
-        />
-      </CheckboxContainer> */}
+
       <SortContainer>
         <SortDropdown onChangeHandler={handleChangeSortType} />
       </SortContainer>
       {isLoaded ? (
         <>
           <Container>
-            {sortArr &&
-              products.map((product) => {
-                return (
-                  <ProductLink
-                    to={`/details/${product._id}`}
-                    style={{ textDecoration: "none" }}
-                    key={product._id}
-                  >
-                    <Card>
-                      <Img src={product.imageSrc} />
-                      <ProductName>{product.name}</ProductName>
-                      <ProductPrice>{product.price}</ProductPrice>
-                      {product.numInStock === 0 && (
-                        <OutOfStock>OUT OF STOCK</OutOfStock>
-                      )}
-                    </Card>
-                  </ProductLink>
-                );
-              })}
+            {products.map((product) => {
+              return (
+                <Link
+                  to={`/details/${product._id}`}
+                  style={{ textDecoration: "none" }}
+                  key={product._id}
+                >
+                  <Card>
+                    <Img src={product.imageSrc} />
+                    <p
+                      style={{
+                        margin: "10px",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                      }}
+                    >
+                      {product.name}
+                    </p>
+                    <p>{product.price}</p>
+
+                    {product.numInStock === 0 ? (
+                      <OutOfStock>OUT OF STOCK</OutOfStock>
+                    ) : (
+                      <Button
+                        onClick={(e) => {
+                          handleClick(e, product);
+                        }}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {/* One-Click Buy */}
+                        BUY NOW
+                      </Button>
+                    )}
+                  </Card>
+                </Link>
+              );
+            })}
           </Container>
         </>
       ) : (
@@ -139,7 +136,6 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  
 `;
 
 const SortContainer = styled.div`
@@ -183,21 +179,4 @@ const Button = styled(Link)`
   font-size: 10px;
   padding: 10px;
   border-radius: 30px;
-`;
-
-const ProductLink = styled(NavLink)`
-&:hover {
-  color: red
-}
-&:visited {
-    color: none;
-  }
-`
-
-const ProductName = styled.span`
-
-`;
-
-const ProductPrice = styled.span`
-
 `;
