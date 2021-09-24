@@ -74,7 +74,13 @@ export const Cart = () => {
             <DivLine className="divHeader" />
 
             {cartItems.map((item) => {
-              subtotal += Number(item.price.slice(1)).toFixed(2) * item.quantity * 100 / 100 // Subtotal Calculated with each item added
+              if (item.price.slice(1,).length > 7) {
+                let num = item.price.slice(1,).split(",").join("");
+                subtotal += Number(num).toFixed(2) * item.quantity * 100 / 100;
+              }
+              else {
+                subtotal += Number(item.price.slice(1,)).toFixed(2) * item.quantity * 100 / 100 // Subtotal Calculated with each item added
+              }
               // ^^ FLOTING POINT NUMBER FIX (WITH * 100 / 100) // DO NOT ALTER UNLESS MORE SUITABLE SOLUTION IS PROVIDED
               return (
                   <ItemBar key={item._id}>

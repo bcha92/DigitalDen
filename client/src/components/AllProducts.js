@@ -53,56 +53,6 @@ export const AllProducts = () => {
     setSortType(event.target.value);
   };
 
-  const sortArr = (arr, type) => {
-    if (arr.length === 0) {
-      return arr;
-    }
-    let sortedArr;
-    switch (type) {
-      case "priceLowToHight":
-        sortedArr = arr.sort(function (a, b) {
-          return (
-            Number(a.price.replace("$", "")) - Number(b.price.replace("$", ""))
-          );
-        });
-        break;
-      case "priceHightToLow":
-        sortedArr = arr.sort(function (a, b) {
-          return (
-            Number(b.price.replace("$", "")) - Number(a.price.replace("$", ""))
-          );
-        });
-        break;
-      case "AtoZ":
-        sortedArr = arr.sort(function (a, b) {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-      case "ZtoA":
-        sortedArr = arr.sort(function (a, b) {
-          if (b.name < a.name) {
-            return -1;
-          }
-          if (b.name > a.name) {
-            return 1;
-          }
-          return 0;
-        });
-        break;
-      default:
-        return arr;
-        break;
-    }
-
-    return sortedArr;
-  };
-
   // CheckBox Stock
   // const handleStockProducts = () => {
   //   setIsCheckboxInStock((isCheckboxInStock) => !isCheckboxInStock);
@@ -143,7 +93,6 @@ export const AllProducts = () => {
                       <Button
                         onClick={(e) => {
                           handleClick(e, product);
-                          // handleCart(e, product);
                         }}
                       >
                         BUY NOW
