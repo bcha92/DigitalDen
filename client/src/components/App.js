@@ -23,6 +23,9 @@ const App = () => {
   });
   const [loginData, setLoginData] = useState();
 
+  // Taxes
+  const [tax, setTax] = useState();
+
   return (
     <BrowserRouter>
       <Header
@@ -53,7 +56,7 @@ const App = () => {
           <CategoryProduct />
         </Route>
         <Route exact path="/checkout">
-          <Checkout />
+          <Checkout setTax={setTax} tax={tax} />
         </Route>
         <Route exact path="/cart">
           <Cart />
@@ -62,7 +65,7 @@ const App = () => {
           <Register />
         </Route>
         <Route exact path="/confirmation">
-          <Confirmation />
+          <Confirmation tax={tax} />
         </Route>
         <Route exact path="/login">
           <LogInOut

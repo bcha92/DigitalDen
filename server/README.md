@@ -8,13 +8,15 @@
 |`/brands/:_id`|GET|Get a list of all products filtered by brand name|
 |`/products`|GET|Get a list of all products (entire JSON parsed array of items.json)|
 |`/products/:_id`|GET|Get a single product from a list of all products|
-|`/products/:_id`|PATCH| Handles the purchase and updates quantities of items |
+|`/order`|POST| Handles the purchase and updates quantities of items |
 |`/category`|GET|Get a list of all categories|
 |`/category/:categoryname`|GET|Get a list of products filtered by category name|
-|`/sorted/a-z`|GET| Get a list of products sorted alphabetically
-|`/sorted/z-a`|GET| Get a list of products sorted alphabetically (reversed)
-|`/sorted/low-high`|GET| Get a list of products sorted by price (low to high)
-|`/sorted/high-low`|GET| Get a list of products sorted by price (high to low)
+|`/sorted/a-z`|GET| Get a list of products sorted alphabetically|
+|`/sorted/z-a`|GET| Get a list of products sorted alphabetically (reversed)|
+|`/sorted/low-high`|GET| Get a list of products sorted by price (low to high)|
+|`/sorted/high-low`|GET| Get a list of products sorted by price (high to low)|
+|`/register`|POST| Add new user via MongoDB server|
+|`/login`|POST|Fetch user for login via MongoDB server|
 
 ### Examples of Endpoint Use
 - NOTE: JSON examples has been modified with (...) to shorten actual results as they contain image sources that may exceed several pages as a result.

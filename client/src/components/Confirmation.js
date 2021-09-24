@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 
 import { FiPrinter } from "react-icons/fi";
 
-export const Confirmation = (props) => {
+export const Confirmation = ({ tax }) => {
   const cartItems = JSON.parse(localStorage.getItem("productInfo"));
   let subtotal = 0; // Subtotal Calculates the total amounts in the cart
+  let total = 0;
 
   const random = Math.floor(Math.random() * 100000);
   const lenghtOfCart = cartItems.length;
   console.log(lenghtOfCart);
 
-  cartItems.map((item, index) => {
+  cartItems.map(item => {
     subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item
+    total = subtotal + Number(tax);
   });
 
   const printHandler = () => {
@@ -34,7 +36,7 @@ export const Confirmation = (props) => {
           </Summary>
           <PurchasedItem>
             <p>Purchased Item ({lenghtOfCart})</p>
-            <p>{subtotal}</p>
+            <p>{subtotal.toFixed(2)}</p>
           </PurchasedItem>
           <Shipping>
             <p>Shipping + Handling</p>
@@ -42,11 +44,11 @@ export const Confirmation = (props) => {
           </Shipping>
           <Tax>
             <p>Sales Tax</p>
-            <p>{10.98}</p>
+            <p>{tax}</p>
           </Tax>
           <Total>
             <h3>Total</h3>
-            <h3>{subtotal + 10.98}</h3>
+            <h3>{total.toFixed(2)}</h3>
           </Total>
           <Delivery>
             <h2>Estimated Delivery Date</h2>

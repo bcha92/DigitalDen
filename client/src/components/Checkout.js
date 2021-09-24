@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Checkout = () => {
+export const Checkout = ({ tax, setTax }) => {
   // const [errMessage, setErrMessage] = useState("");
   const [province, setProvince] = useState("");
-  const [tax, setTax] = useState();
-
-  
   const cartItems = JSON.parse(localStorage.getItem("productInfo"));
   let subtotal = 0;
 
@@ -53,9 +50,12 @@ export const Checkout = () => {
     province.toUpperCase() === "NT" ||
     "nunavut".includes(province.toLowerCase()) ||
     province.toUpperCase() === "NU" ||
-    "yukon".includes(province.toLowerCase()) ||
+    "yukon territory".includes(province.toLowerCase()) ||
     province.toUpperCase() === "YT") {
       setTax((Number(subtotal) * 0.05).toFixed(2));
+    }
+    else {
+      setTax((Number(subtotal) * 0.15).toFixed(2));
     }
   }, [province])
 
