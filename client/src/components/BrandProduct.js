@@ -127,12 +127,12 @@ const Title = styled.h1`
 `;
 
 const OutOfStock = styled.div`
-  background-color: #1313dd;
-  color: white;
+  background-color: #ababab;
+  color: black;
   font-size: 10px;
-  padding: 10px;
-  border-radius: 30px;
   margin: 10px;
+  padding: 10px 50px;
+  border-radius: 30px;
 `;
 const Card = styled.div`
   background-color: white;
@@ -145,17 +145,31 @@ const Card = styled.div`
   border: 1px solid white;
   padding: 10px;
   margin: 10px;
-  box-shadow: 5px 5px 4px #888888;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   color: black;
 `;
 const Button = styled.div`
   margin-top: 10px;
-  background-color: #13dd90;
-  color: white;
+  background-color: #ffa41c;
+  color: black;
   font-size: 10px;
-  padding: 10px;
+  padding: 10px 50px;
   border-radius: 30px;
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+
+  &:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    background-color: #e6961e;
+  }
 `;
 
 const Container = styled.div`
