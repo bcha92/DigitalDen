@@ -91,12 +91,12 @@ const purchaseHandle = async (req, res) => {
             firstName, surname, email, address, city,
             province, country, creditCard, expiry, phone,
             order: inventoryArray,
-            total: `$${total}`,
+            total,
         };
 
         // Once inventory is updated, a thank you message is returned. **IMPORTANT: AS LOCALSTORAGE IS A FRONT-END OBJECT, REMOVING THE ITEMS FROM LOCAL STORAGE IS IMPORTANT, BUT MUST BE DONE ON FRONT-END AFTER THIS FETCH REQUEST IS COMPLETED!!!**
-        return res.status(200).json({
-            status: 204,
+        return res.status(201).json({
+            status: 201,
             message: `Thank you for your purchase. Your order is now sent for processing.`,
             data,
         })

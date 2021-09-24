@@ -140,7 +140,7 @@ export const Category = () => {
               backgroundPosition: "center",
             }}
           >
-            <Text class="card__background">Gaming</Text>
+            <Text className="card__background">Gaming</Text>
           </CategoryGaming>
         </Link>
       </CardWrapper>

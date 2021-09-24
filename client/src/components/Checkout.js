@@ -1,12 +1,77 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export const Checkout = ({ tax, setTax }) => {
-  // const [errMessage, setErrMessage] = useState("");
   const [province, setProvince] = useState("");
+  // const [cartInfo, setCartInfo] = useState()
   const cartItems = JSON.parse(localStorage.getItem("productInfo"));
+  const formHistory = useHistory();
   let subtotal = 0;
+
+  // useEffect(() => {
+  //   setCartInfo(JSON.parse(localStorage.getItem("productInfo"))
+  // }, [])
+
+  const handleInput = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    if (name === "province") {
+      setProvince(event.target.value);
+    }
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    surname: "",
+    email: "",
+    address: "",
+    city: "",
+    province: "",
+    phone: "",
+    country: "",
+    creditCard: "",
+    expiry: "",
+    total: (Number(subtotal) + Number(tax)).toFixed(2),
+    cart: cartItems
+  });
+  console.log((Number(subtotal) + Number(tax)).toFixed(2), 'TOALLLLLL')
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(userInfo, ' order info')
+
+    fetch('/order', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userInfo)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, ' fetch adta')
+        if (data.status === 201) {
+          if (localStorage.getItem("order") === null) {
+            localStorage.setItem("order", JSON.stringify([]))
+          }
+          const ordersList = JSON.parse(localStorage.getItem("order"))
+          ordersList.push(data)
+          localStorage.setItem("order", JSON.stringify(ordersList))
+          localStorage.setItem("confirmation", JSON.stringify(data))
+        } else {
+          return
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    // setUserLogIn({ ... });
+    localStorage.setItem("productInfo", JSON.stringify([]))
+    formHistory.push("/confirmation");
+  }
 
   // Provincial Taxes
   useEffect(() => {
@@ -59,23 +124,23 @@ export const Checkout = ({ tax, setTax }) => {
     }
   }, [province, setTax, subtotal])
 
-  useEffect(() => {
-    fetch("/order")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      })
-  })
 
   return (
     <>
       <Wrapper>
-        <PaymentContainer>
+        <Form onSubmit={handleSubmit}>
           <ContactWrapper>
             <HeaderTitle>Contact Information</HeaderTitle>
             <InputDiv>
               <OuterSpan>
-                <Input className="inputText" type="text" required />
+                <Input
+                  className="inputText"
+                  type="text"
+                  required
+                  name="email"
+                  id="email"
+                  onChange={handleInput}
+                  value={userInfo.email} />
                 <InnerSpan className="floating-label">Email</InnerSpan>
               </OuterSpan>
             </InputDiv>
@@ -83,27 +148,54 @@ export const Checkout = ({ tax, setTax }) => {
             <InputRow>
               <InputDiv>
                 <OuterSpan>
-                  <FirstInput className="inputText" type="text" required />
+                  <FirstInput
+                    className="inputText"
+                    type="text"
+                    required
+                    name="firstName"
+                    id="firstName"
+                    onChange={handleInput}
+                    value={userInfo.firstName}
+                  />
                   <InnerSpan className="floating-label">First name</InnerSpan>
                 </OuterSpan>
               </InputDiv>
               <InputDiv>
                 <OuterSpan>
-                  <SecondInput className="inputText" type="text" required />
+                  <SecondInput className="inputText"
+                    type="text"
+                    required
+                    name="surname"
+                    id="surname"
+                    onChange={handleInput}
+                    value={userInfo.address} />
                   <InnerSpan className="floating-label">Last name</InnerSpan>
                 </OuterSpan>
               </InputDiv>
             </InputRow>
             <InputDiv>
               <OuterSpan>
-                <Input className="inputText" type="text" required />
+                <Input
+                  className="inputText"
+                  type="text"
+                  required
+                  name="address"
+                  id="address"
+                  onChange={handleInput}
+                  value={userInfo.address} />
                 <InnerSpan className="floating-label">Address</InnerSpan>
               </OuterSpan>
             </InputDiv>
             <InputRow>
               <InputDiv>
                 <OuterSpan>
-                  <FirstTwoInput className="inputText" type="text" required />
+                  <FirstTwoInput className="inputText"
+                    type="text"
+                    required
+                    name="city"
+                    id="city"
+                    onChange={handleInput}
+                    value={userInfo.city} />
                   <InnerSpan className="floating-label">City</InnerSpan>
                 </OuterSpan>
               </InputDiv>
@@ -112,29 +204,53 @@ export const Checkout = ({ tax, setTax }) => {
                   <FirstTwoInput
                     className="inputText"
                     type="text"
-                    onChange={(e) => setProvince(e.target.value)}
+                    onChange={handleInput}
                     required
+                    name="province"
+                    id="province"
+                    value={userInfo.province}
                   />
                   <InnerSpan className="floating-label">Province</InnerSpan>
                 </OuterSpan>
               </InputDiv>
               <InputDiv>
                 <OuterSpan>
-                  <LastInput className="inputText" type="text" required />
+                  <LastInput
+                    className="inputText"
+                    type="text"
+                    required
+                    name="country"
+                    id="country"
+                    onChange={handleInput}
+                    value={userInfo.country} />
                   <InnerSpan className="floating-label">Country</InnerSpan>
                 </OuterSpan>
               </InputDiv>
             </InputRow>
             <InputDiv>
               <OuterSpan>
-                <Input className="inputText" type="text" required />
+                <Input
+                  className="inputText"
+                  type="text"
+                  required
+                  name="phone"
+                  id="phone"
+                  onChange={handleInput}
+                  value={userInfo.phone} />
                 <InnerSpan className="floating-label">Phone</InnerSpan>
               </OuterSpan>
             </InputDiv>
             <InputRow>
               <InputDiv>
                 <OuterSpan>
-                  <FirstInput className="inputText" type="text" required />
+                  <FirstInput
+                    className="inputText"
+                    type="text"
+                    required
+                    name="creditCard"
+                    id="creditCard"
+                    onChange={handleInput}
+                    value={userInfo.creditCard} />
                   <InnerSpan className="floating-label">
                     Credit card number
                   </InnerSpan>
@@ -142,19 +258,20 @@ export const Checkout = ({ tax, setTax }) => {
               </InputDiv>
               <InputDiv>
                 <OuterSpan>
-                  <SecondInput className="inputText" type="text" required />
+                  <SecondInput className="inputText"
+                    type="text"
+                    required
+                    name="expiry"
+                    id="expiry"
+                    onChange={handleInput}
+                    value={userInfo.expiry} />
                   <InnerSpan className="floating-label">Expiry date</InnerSpan>
                 </OuterSpan>
               </InputDiv>
             </InputRow>
-            {/* {errMessage && <p style={{ color: "red" }}>{errMessage}</p>} */}
-            {/* <BtnWrapper onClick={}> */}
-            <Link to={"/confirmation"} style={{ textDecoration: "none" }}>
-              <Btn>Confirm Payment</Btn>
-            </Link>
-            {/* </BtnWrapper> */}
+            <ConfirmBtn type="submit" value="Confirm Payment"> Confirm order </ConfirmBtn>
           </ContactWrapper>
-        </PaymentContainer>
+        </Form>
         <ViewCartContainer>
           <CartContainer>
             <ItemsContainer>
@@ -181,7 +298,7 @@ export const Checkout = ({ tax, setTax }) => {
             <Divider />
             <SubTotal>
               <p>Subtotal</p>
-              <p>CAD ${subtotal}</p>
+              <p>CAD ${subtotal.toFixed(2)}</p>
             </SubTotal>
             <SubTotal>
               <p>Shipping</p>
@@ -194,7 +311,7 @@ export const Checkout = ({ tax, setTax }) => {
             <Divider />
             <Total>
               <p>Total</p>
-              <p>CAD ${Number(subtotal) + Number(tax)}</p>
+              <p>CAD ${(Number(subtotal) + Number(tax)).toFixed(2)}</p>
             </Total>
           </CartContainer>
         </ViewCartContainer>
@@ -212,7 +329,7 @@ const Wrapper = styled.div`
   margin-top: 100px;
 `;
 
-const PaymentContainer = styled.div`
+const Form = styled.form`
   width: 50%;
   display: flex;
   justify-content: flex-end;
@@ -328,8 +445,10 @@ const LastInput = styled.input`
   }
 `;
 
-const Btn = styled.button`
+const ConfirmBtn = styled.button`
   text-transform: none;
+  width: 150px;
+  height: 50px;
   background-color: orange;
   border: none;
   border-radius: 5px;

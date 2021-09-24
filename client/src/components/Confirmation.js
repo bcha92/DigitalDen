@@ -1,72 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { FiPrinter } from "react-icons/fi";
 
 export const Confirmation = ({ tax }) => {
-  const cartItems = JSON.parse(localStorage.getItem("productInfo"));
+  const [confirmationInfo, setConfirmationInfo] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setConfirmationInfo(JSON.parse(localStorage.getItem("confirmation")))
+    setIsLoaded(true)
+  }, [])
+
   let subtotal = 0; // Subtotal Calculates the total amounts in the cart
-  let total = 0;
 
   const random = Math.floor(Math.random() * 100000);
-  const lenghtOfCart = cartItems.length;
-
-  cartItems.map(item => {
-    subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item
-    return total = subtotal + Number(tax);
-  });
 
   const printHandler = () => {
     window.print();
   };
-
   return (
-    <Wrapper>
-      <Form>
-        <LogoBox>
-          <h1>Order Received!</h1>
-          <p>ORDER NO R-{random}</p>
-        </LogoBox>
-        <InfoBox>
-          <h2 style={{ textAlign: "center" }}>Thank you for your order!</h2>
-          <Summary>
-            <h1 style={{ textDecoration: "underline" }}>Summary of Purchase</h1>
-          </Summary>
-          <PurchasedItem>
-            <p>Purchased Item ({lenghtOfCart})</p>
-            <p>{subtotal.toFixed(2)}</p>
-          </PurchasedItem>
-          <Shipping>
+    <>
+      {isLoaded ? (
+        <Wrapper>
+          <Form>
+            <LogoBox>
+              <h1>Order Received!</h1>
+              <p>ORDER NO R-{random}</p>
+            </LogoBox>
+            <InfoBox>
+              <h2 style={{ textAlign: "center" }}>Thank you for your order!</h2>
+              <Summary>
+                <h1 style={{ textDecoration: "underline" }}>Summary of Purchase</h1>
+              </Summary>
+              {confirmationInfo.data.order.map((item) => {
+                subtotal += Number(item.price.slice(1,))
+                return <PurchasedItem>
+                  <p><b>Purchased Item</b> ({item.name})</p>
+                  <p></p>
+                </PurchasedItem>
+              }
+              )}
+              {/* <Shipping>
             <p>Shipping + Handling</p>
             <p>FREE</p>
           </Shipping>
           <Tax>
             <p>Sales Tax</p>
             <p>{tax}</p>
-          </Tax>
-          <Total>
-            <h3>Total</h3>
-            <h3>{total.toFixed(2)}</h3>
-          </Total>
-          <Delivery>
-            <h2>Estimated Delivery Date</h2>
-            <p>October 6th, 2021</p>
-          </Delivery>
-        </InfoBox>
-        <ButtonDiv>
-          <PrintContainer>
-            <Button onClick={printHandler}>
-              <PrintLogo />
-              PRINT RECEIPT
-            </Button>
-          </PrintContainer>
-          <Link to={"/"} style={{ textDecoration: "none" }}>
-            <Button>Shop Again</Button>
-          </Link>
-        </ButtonDiv>
-      </Form>
-    </Wrapper>
+          </Tax> */}
+              <Total>
+                <h3>Total</h3>
+
+                {console.log((confirmationInfo.data.total), 'conf')}
+                {console.log(subtotal, 'subtotal')}
+
+                <h3>${((Number(confirmationInfo.data.total)) + subtotal).toFixed(2)}</h3>
+              </Total>
+              <Delivery>
+                <h2>Estimated Delivery Date</h2>
+                <p>October 6th, 2021</p>
+              </Delivery>
+            </InfoBox>
+            <ButtonDiv>
+              <PrintContainer>
+                <Button onClick={printHandler}>
+                  <PrintLogo />
+                  PRINT RECEIPT
+                </Button>
+              </PrintContainer>
+              <Link to={"/"} style={{ textDecoration: "none" }}>
+                <Button>Shop Again</Button>
+              </Link>
+            </ButtonDiv>
+          </Form>
+        </Wrapper>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
   );
 };
 

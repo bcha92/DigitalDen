@@ -7,6 +7,7 @@ export const SearchBar = () => {
   const [inputValue, setInputValue] = useState([]);
   const [value, setValue] = useState("");
 
+  // fetching products info by name to display in search bar
   useEffect(() => {
     fetch("/products")
       .then((res) => res.json())
@@ -28,39 +29,44 @@ export const SearchBar = () => {
             placeholder="Search the Den"
             onChange={(event) => setValue(event.target.value)}
           ></SearchInput>
-          <i class="fas fa-backspace"></i>
-        </div>
-        <div>
-          {value.length > 1 && (
-            <UnorderedList>
-              {inputValue
-                .filter((item) => {
-                  return item.name.toLowerCase().includes(value.toLowerCase());
-                })
-                .map((item) => {
-                  return (
-                    <DetailLink to={`/details/${item._id}`}>
-                      <SuggestionList>
-                        <ResultText>
-                          {item.name.slice(0, value.indexOf(value[0]))}
-                        </ResultText>
-                        {value}
-                        <ResultText>
-                          {item.name.slice(
-                            value.indexOf(value[value.length - 1])
-                          )}
-                        </ResultText>{" "}
-                      </SuggestionList>
-                    </DetailLink>
-                  );
-                })}
-            </UnorderedList>
-          )}
+          <i className="fas fa-backspace"></i>
+          <SearchContainer>
+            {value.length > 1 && (
+              <UnorderedList>
+                {inputValue
+                  .filter((item) => {
+                    return item.name.toLowerCase().includes(value.toLowerCase());
+                  })
+                  .map((item) => {
+                    return (
+                      <DetailLink key={item._id} to={`/details/${item._id}`}>
+                        <SuggestionList>
+                          <ResultText>
+                            {item.name.slice(0, value.indexOf(value[0]))}
+                          </ResultText>
+                          {value}
+                          <ResultText>
+                            {item.name.slice(
+                              value.indexOf(value[value.length - 1])
+                            )}
+                          </ResultText>
+                          {" "}
+                        </SuggestionList>
+                      </DetailLink>
+                    );
+                  })}
+              </UnorderedList>
+            )}
+          </SearchContainer>
         </div>
       </div>
     </>
   );
 };
+
+const SearchContainer = styled.div`
+position: relative;
+`
 
 const SearchInput = styled.input`
   width: 300px;
@@ -90,9 +96,8 @@ const SuggestionList = styled.li`
 
 const UnorderedList = styled.ul`
   position: absolute;
-  top: 5vh;
   left: 0px;
-  width: 295px;
+  width: 298px;
   float: right;
   background-color: white;
   border: 2px solid black;
@@ -101,7 +106,7 @@ const UnorderedList = styled.ul`
   text-align: left;
   border-radius: 4px;
   overflow-y: scroll;
-  padding: 0 5px;
+  z-index: 1;
 `;
 
 const ResultText = styled.span`

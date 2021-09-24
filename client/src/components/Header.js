@@ -90,13 +90,8 @@ const List = styled.li`
   display: inline-block;
   padding-right: 30px;
   transition: all 0.2s ease-in-out;
+  font-size: 20px;
 
-  &:hover {
-    color: grey;
-  }
-  &:visited {
-    color: none;
-  }
 `;
 
 const StyledNavLink = styled(NavLink)``;
@@ -155,6 +150,7 @@ const Button = styled.button`
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   position: relative;
   overflow: hidden;
-}
 
+
+  font-size: 20px;
 `;
