@@ -1,12 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Checkout = () => {
   // const [errMessage, setErrMessage] = useState("");
+  const [province, setProvince] = useState("");
+  const [tax, setTax] = useState();
+
+  
+  const cartItems = JSON.parse(localStorage.getItem("productInfo"));
+  let subtotal = 0;
+
+  // Provincial Taxes
+  useEffect(() => {
+    // 15% // NL / NB / NS / PE
+    if ("newfoundland".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "NL" ||
+    "new brunswick".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "NB" ||
+    "nova scotia".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "NS" ||
+    "prince edward island".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "PE") {
+      setTax((Number(subtotal) * 0.15).toFixed(2));
+    }
+    // 14.975% // QC
+    else if ("quebec".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "QC") {
+      setTax((Number(subtotal) * 0.14975).toFixed(2));
+    }
+    // 13% // ON
+    else if ("ontario".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "ON") {
+      setTax((Number(subtotal) * 0.13).toFixed(2));
+    }
+    // 12% // BC / MB
+    else if ("british columbia".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "BC" ||
+    "manitoba".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "MB") {
+      setTax((Number(subtotal) * 0.12).toFixed(2));
+    }
+    // 11% // SK
+    else if ("saskatchewan".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "SK") {
+      setTax((Number(subtotal) * 0.11).toFixed(2));
+    }
+    // 5% // AB / NT / NU / YK
+    else if ("alberta".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "AB" ||
+    "northwest territories".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "NT" ||
+    "nunavut".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "NU" ||
+    "yukon".includes(province.toLowerCase()) ||
+    province.toUpperCase() === "YT") {
+      setTax((Number(subtotal) * 0.05).toFixed(2));
+    }
+  }, [province])
 
   const handleClick = () => {};
 
+  console.log(tax);
   return (
     <>
       <Wrapper>
@@ -49,7 +104,12 @@ export const Checkout = () => {
               </InputDiv>
               <InputDiv>
                 <OuterSpan>
-                  <FirstTwoInput className="inputText" type="text" required />
+                  <FirstTwoInput
+                    className="inputText"
+                    type="text"
+                    onChange={(e) => setProvince(e.target.value)}
+                    required
+                    />
                   <InnerSpan className="floating-label">Province</InnerSpan>
                 </OuterSpan>
               </InputDiv>
@@ -93,19 +153,30 @@ export const Checkout = () => {
         <ViewCartContainer>
           <CartContainer>
             <ItemsContainer>
-              <ItemContainer>
-                <ImageWrapper>
-                  <ItemImage src />
-                </ImageWrapper>
-                <Quantity></Quantity>
-                <ItemName></ItemName>
-                <ItemPrice></ItemPrice>
-              </ItemContainer>
+              {cartItems.map(item => {
+                if (item.price.slice(1,).length > 7) {
+                  let num = item.price.slice(1,).split(",").join("");
+                  subtotal += Number(num).toFixed(2) * item.quantity * 100 / 100;
+                }
+                else {
+                  subtotal += Number(item.price.slice(1,)).toFixed(2) * item.quantity * 100 / 100
+                }
+                return (
+                <ItemContainer key={item._id}>
+                  <ImageWrapper>
+                    <ItemImage src={item.imageSrc} alt={item._id} />
+                  </ImageWrapper>
+                  <Quantity>{item.quantity}</Quantity>
+                  <ItemName>{item.name}</ItemName>
+                  <ItemPrice>{item.price}</ItemPrice>
+                </ItemContainer>
+                )
+              })}
             </ItemsContainer>
             <Divider />
             <SubTotal>
               <p>Subtotal</p>
-              <p>CAD $</p>
+              <p>CAD ${subtotal}</p>
             </SubTotal>
             <SubTotal>
               <p>Shipping</p>
@@ -113,12 +184,12 @@ export const Checkout = () => {
             </SubTotal>
             <SubTotal>
               <p>Tax</p>
-              <p>CAD $</p>
+              <p>CAD ${tax}</p>
             </SubTotal>
             <Divider />
             <Total>
               <p>Total</p>
-              <p>CAD $</p>
+              <p>CAD ${Number(subtotal) + Number(tax)}</p>
             </Total>
           </CartContainer>
         </ViewCartContainer>
