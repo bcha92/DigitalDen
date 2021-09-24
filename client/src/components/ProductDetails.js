@@ -126,11 +126,12 @@ const Container1 = styled.div`
   height: 500px;
   width: 500px;
   font-family: "Oswald", sans-serif;
-  box-shadow: 5px 5px 4px #888888;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid white;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 `;
 const Container2 = styled.div`
   height: 400px;
@@ -149,7 +150,7 @@ const Img = styled.img`
 `;
 
 const Button = styled.button`
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: #ffa41c;
   color: white;
   font-size: 10px;
