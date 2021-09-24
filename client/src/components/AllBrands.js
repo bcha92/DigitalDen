@@ -53,18 +53,11 @@ export const AllBrands = () => {
 };
 
 const Container = styled.div`
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 50%;
-  align-items: center;
-  margin-left: 430px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 `;
-// max-width: 1000px;
 
 const BrandText = styled.div`
   background-color: white;

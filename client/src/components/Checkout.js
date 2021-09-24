@@ -57,7 +57,7 @@ export const Checkout = ({ tax, setTax }) => {
     else {
       setTax((Number(subtotal) * 0.15).toFixed(2));
     }
-  }, [province])
+  }, [province, setTax, subtotal])
 
   useEffect(() => {
     fetch("/order")
@@ -326,10 +326,6 @@ const LastInput = styled.input`
   &:focus {
     outline-color: red;
   }
-`;
-
-const BtnWrapper = styled.div`
-  margin: 50px 0;
 `;
 
 const Btn = styled.button`

@@ -323,5 +323,3 @@ const Text = styled.p`
   font-family: var(--heading-font-family);
   font-weight: 700;
 `;
-
-const Img = styled.img``;

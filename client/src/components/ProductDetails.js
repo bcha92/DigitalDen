@@ -66,7 +66,7 @@ export const ProductDetails = () => {
     let disableOnFull = false;
     let cart = JSON.parse(localStorage.getItem("productInfo"));
     cart.forEach((item) => {
-      if (item._id == id && item.quantity >= product.numInStock) {
+      if (item._id === id && item.quantity >= product.numInStock) {
         disableOnFull = true;
       }
     })
@@ -133,11 +133,6 @@ const Container2 = styled.div`
   border-radius: 20px;
   background-color: #b9b7b7;
   margin-left: 100px;
-  /* margin-top: 25px; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
   text-align: center;
 `;
 
