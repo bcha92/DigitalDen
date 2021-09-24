@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import SortDropdown from "./SortDropdown";
 
