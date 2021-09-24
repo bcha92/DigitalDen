@@ -126,4 +126,8 @@ const LogInLink = styled(NavLink)`
 const Button = styled.button`
   border: none;
   background: transparent;
+  &:hover {
+    color: grey;
+    cursor: pointer;
+  }
 `;
