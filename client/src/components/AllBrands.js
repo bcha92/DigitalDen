@@ -23,8 +23,7 @@ export const AllBrands = () => {
         // setStatus("loading complete")
       });
   }, []);
-  console.log(brand, ' THIS IS BRAND')
-
+  console.log(brand, " THIS IS BRAND");
 
   return (
     <>
@@ -32,15 +31,18 @@ export const AllBrands = () => {
         <h1>All brands</h1>
       </Title>
       <Container>
-        {brand.sort((a, b) => (a.name > b.name ? 1 : -1)).slice(0, visible).map((item, brandName) => {
-          return (
-            <BrandLink key={item._id} to={`/brands/${item._id}`}>
-              <BrandText>
-                <Text>{item.name}</Text>
-              </BrandText>
-            </BrandLink>
-          );
-        })}
+        {brand
+          .sort((a, b) => (a.name > b.name ? 1 : -1))
+          .slice(0, visible)
+          .map((item, brandName) => {
+            return (
+              <BrandLink key={item._id} to={`/brands/${item._id}`}>
+                <BrandText>
+                  <Text>{item.name}</Text>
+                </BrandText>
+              </BrandLink>
+            );
+          })}
       </Container>
       <Container>
         <Link to="/brands">
@@ -57,6 +59,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-right: 50px;
 `;
 
 const BrandText = styled.div`
@@ -67,10 +70,21 @@ const BrandText = styled.div`
   align-items: center;
   border: 1px solid white;
   padding: 10px;
-  border-radius: 105px;
-  box-shadow: 5px 5px 4px #888888;
+  border-radius: 10px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-out;
   margin-top: 50px;
   margin-left: 70px;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 50px 150px rgba(0, 0, 0, 0.11), 0 24px 46px #c4c4c4;
+  }
+  &:active {
+    transform: scale(1) translateZ(0);
+
+    filter: brightness(0.5) saturate(0) contrast(1.2) blur(1px);
+  }
 `;
 
 // const Title = styled.h2`
@@ -90,8 +104,8 @@ const BrandLink = styled(Link)`
 `;
 
 const Text = styled.h3`
-  align-items: center;
-  margin-left: 70px;
+  text-align: center;
+  margin-top: 5px;
 `;
 
 const ListItem = styled.button`

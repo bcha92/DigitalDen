@@ -46,12 +46,11 @@ export const ProductDetails = () => {
         if (item.quantity < product.numInStock) {
           item.quantity++;
           itemFound = true;
-        }
-        else {
+        } else {
           itemFound = true; // Ensures, a second identical item is not added
         }
       }
-    })
+    });
     // If item is NOT found, product with 1 quantity is pushed
     if (!itemFound) {
       productArray.push(product);
@@ -69,9 +68,9 @@ export const ProductDetails = () => {
       if (item._id === id && item.quantity >= product.numInStock) {
         disableOnFull = true;
       }
-    })
+    });
     return disableOnFull;
-  }
+  };
 
   return (
     <Wrapper>
@@ -92,13 +91,18 @@ export const ProductDetails = () => {
               <Link to="/cart">
                 <Button
                   onClick={handleClick}
-                  disabled={disableOnFull(_id) ?
-                    true : false
-                  }
-                >Add to cart</Button>
+                  disabled={disableOnFull(_id) ? true : false}
+                >
+                  Add to cart
+                </Button>
               </Link>
             )}
-            {disableOnFull(_id) && <R>Unable to add to cart.All remaining stock has been added to cart.</R>}
+            {disableOnFull(_id) && (
+              <R>
+                Unable to add to cart.All remaining stock has been added to
+                cart.
+              </R>
+            )}
           </Container2>
         </>
       ) : (
@@ -162,7 +166,7 @@ const Button = styled.button`
   }
   &:disabled {
     display: none;
-  };
+  }
 `;
 
 const R = styled.span`
@@ -172,11 +176,10 @@ const R = styled.span`
 `;
 
 const ProductInfo = styled.h3`
-margin-top: 35px;
-font-style: var(--heading-font-family);
-
-`
+  margin-top: 35px;
+  font-style: var(--heading-font-family);
+`;
 
 const InfoContainer = styled.div`
-margin-top: 70px;
-`
+  margin-top: 70px;
+`;
