@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export const Confirmation = ({ tax }) => {
 
   cartItems.map(item => {
     subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item
-    total = subtotal + Number(tax);
+    return total = subtotal + Number(tax);
   });
 
   const printHandler = () => {

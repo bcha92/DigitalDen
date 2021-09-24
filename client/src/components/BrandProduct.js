@@ -105,36 +105,6 @@ export const BrandProduct = () => {
   );
 };
 
-// const Title = styled.h2`
-//   color: black;
-//   text-align: center;
-// `;
-
-const ProductContainer = styled.div`
-  display: flex;
-  color: black;
-  border: 2px solid black;
-  width: 425px;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-`;
-
-const ItemName = styled.span`
-  font-weight: bold;
-  margin: 3px;
-  /* text-overflow: ellipsis; */
-`;
-
-const ItemPrice = styled.span`
-  color: black;
-  margin: 10px;
-`;
-
-const ItemImg = styled.img`
-  height: 100px;
-`;
-
 const Img = styled.img`
   height: 100px;
   width: 100px;
@@ -146,14 +116,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-`;
-
-const SortContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  padding-bottom: 2rem;
-  margin-right: 10rem;
 `;
 
 const Title = styled.h1`

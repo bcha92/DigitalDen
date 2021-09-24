@@ -14,7 +14,7 @@ export const Cart = () => {
       if (item._id === itemId) {
         cartItems.splice(index, 1);
         localStorage.setItem("productInfo", JSON.stringify(cartItems));
-        {/* Reloads current page for changes to take effect */}
+        /* Reloads current page for changes to take effect */
         window.location.reload();
       }
     })
@@ -27,7 +27,7 @@ export const Cart = () => {
       if (item._id === itemId) {
         item.quantity += 1;
         localStorage.setItem("productInfo", JSON.stringify(cartItems));
-        {/* Reloads current page for changes to take effect */}
+        /* Reloads current page for changes to take effect */
         window.location.reload();
       }
     })
@@ -44,7 +44,7 @@ export const Cart = () => {
           cartItems.splice(index, 1);
         }
         localStorage.setItem("productInfo", JSON.stringify(cartItems));
-        {/* Reloads current page for changes to take effect */}
+        /* Reloads current page for changes to take effect */
         window.location.reload();
       }
     })
@@ -117,7 +117,7 @@ export const Cart = () => {
 
         {/* Subtotal is Calculated Here */}
         <ItemBar className="totalHead">
-          <B>Subtotal: ${subtotal}</B>
+          <B>Subtotal: ${subtotal.toFixed()}</B>
         </ItemBar>
         <CheckoutBar>{/* Link will take you to "Checkout Page" */}
           
@@ -208,11 +208,6 @@ const QuantityWrap = styled.div`
 const B = styled.p`
   font-weight: bold;
   &.price {margin-left: 50px};
-`;
-
-const R = styled.span`
-  color: crimson;
-  font-style: italic;
 `;
 
 const DivLine = styled.div`

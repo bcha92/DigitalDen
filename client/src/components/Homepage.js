@@ -78,7 +78,7 @@ export const Homepage = () => {
               />
             </ImgContainer>
           </Link>
-          <Link to="/brands?brand=Sony">
+          <Link to="/brands/12407">
             <ImgContainer>
               <Img
                 style={{ width: "200px", height: "45px" }}
@@ -92,14 +92,6 @@ export const Homepage = () => {
     </>
   );
 };
-
-// const Heading = styled.h3`
-//   display: flex;
-//   text-transform: uppercase;
-//   justify-content: space-around;
-//   margin-top: 150px;
-//   font-size: 25px;
-// `;
 
 const HeadingBrand = styled.h3`
   display: flex;

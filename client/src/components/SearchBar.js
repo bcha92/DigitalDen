@@ -21,7 +21,7 @@ export const SearchBar = () => {
 
   return (
     <>
-      <SearchContainer>
+      <div>
         <div>
           <SearchInput
             type="text"
@@ -30,7 +30,7 @@ export const SearchBar = () => {
           ></SearchInput>
           <i class="fas fa-backspace"></i>
         </div>
-        <SuggestionContainer >
+        <div>
           {value.length > 1 && (
             <UnorderedList>
               {inputValue
@@ -57,29 +57,16 @@ export const SearchBar = () => {
                 })}
             </UnorderedList>
           )}
-        </SuggestionContainer>
-      </SearchContainer>
+        </div>
+      </div>
     </>
   );
 };
-
-const SearchContainer = styled.div`
-  float: right;
-  /* margin-top: 50px; */
-  display: flex;
-  /* height: 500px; */
-  position: relative;
-`;
 
 const SearchInput = styled.input`
   width: 300px;
   height: 40px;
   border-radius: 3px;
-`;
-const SearchBtn = styled.button`
-  width: 40px;
-  height: 45px;
-  margin-left: 3px;
 `;
 
 const SuggestionList = styled.li`
@@ -104,7 +91,7 @@ const UnorderedList = styled.ul`
   background-color: white;
   border: 2px solid black;
   border-bottom: 1px solid black;
-  /* height: 300px; */
+  max-height: 300px;
   text-align: left;
   border-radius: 4px;
   overflow-y: scroll;
@@ -118,8 +105,4 @@ const ResultText = styled.span`
 const DetailLink = styled(Link)`
   text-decoration: none;
   color: black;
-`;
-
-const SuggestionContainer = styled.div`
-  /* height: 250px; */
 `;
