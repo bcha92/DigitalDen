@@ -11,6 +11,10 @@ export const ProductDetails = () => {
   //will become true after the data from fetch as been stored
   const [isLoaded, setIsLoaded] = useState(false);
 
+  if (localStorage.getItem("productInfo") === null) {
+    localStorage.setItem("productInfo", JSON.stringify([]));
+  }
+
   //retrieve all products
   useEffect(() => {
     fetch(`/products/${_id}`)

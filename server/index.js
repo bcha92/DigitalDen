@@ -44,27 +44,18 @@ express()
 
   .get("/products", getProducts)
   .get("/products/:_id", getProductById)
-
-
+  
   .get("/category", getCategories)
   .get("/category/:categoryname", getProductsByCategory)
 
-  .patch("/products", inventoryCheck, purchaseHandle)
-
-
   // Handles Inventory Check and Update on Purchase
   // req.body MUST BE AN ARRAY (i.e. LOCAL STORAGE SHOPPING CART)
-  .patch("/products", inventoryCheck, purchaseHandle)
+  .post("/order", inventoryCheck, purchaseHandle)
 
   // Sorted Products
   // :sortorder only accept "a-z", "z-a" for alphabet
   // and "low-high" or "high-low" for prices
   .get("/sorted/:sortOrder", getSortedProducts)
-
-  // .patch("/products/:_id", updateProductPurchase)
-
-  .get("/category", getCategories)
-  .get("/category/:categoryname", getProductsByCategory)
 
   .post("/register", addNewUser)
   .post("/login", getUserById)

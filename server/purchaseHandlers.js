@@ -2,13 +2,13 @@
 const fs = require("fs");
 const items = JSON.parse(fs.readFileSync("data/items.json"));
 
-// Error Handler
-const { Error404 } = require("./ErrorHandler");
+// UUID v4: use this package to generate unique ids: https://www.npmjs.com/package/uuid
+const { v4: uuidv4 } = require("uuid");
 
 // Inventory Check Middleware
 const inventoryCheck = async (req, res, next) => {
     // req.body in this case should be an array from localStorage Cart
-    const cart = req.body;
+    const { cart } = req.body;
 
     try {
         let inventoryArray = [];
@@ -47,8 +47,24 @@ const inventoryCheck = async (req, res, next) => {
 
 // Purchase Handle
 const purchaseHandle = async (req, res) => {
-    // req.body in this case should be an array from localStorage Cart
-    const cart = req.body;
+    // req.body should be an order form object passed from post
+    const {
+        email, firstName, surname, address, cart, city,
+        province, country, phone, creditCard, expiry,
+        total,
+    } = req.body;
+
+    // Checks for missing information
+    if (!firstName || !surname || !address || !city ||
+        !province || !country || !phone || !creditCard ||
+        !expiry || cart.length < 1 || !email.includes("@")
+    ) {
+        return res.status(400).json({
+            status: 400,
+            message: "Error, missing data",
+            data: req.body,
+        })
+    }
 
     try {
         let inventoryArray = [];
@@ -59,16 +75,30 @@ const purchaseHandle = async (req, res) => {
                 // Once cartItem has been found in inventory, inventory numInStock is updated based on the purchase quantity of each cartItem
                 if (cartItem._id === inventory._id) {
                     inventory.numInStock -= cartItem.quantity;
-                    inventoryArray.push(inventory);
+                    inventoryArray.push({
+                        name: inventory.name,
+                        price: inventory.price,
+                        _id: inventory._id,
+                        quantity: cart.quantity,
+                    });
                 }
             })
         });
+
+        // 
+        const data = {
+            id: uuidv4(),
+            firstName, surname, email, address, city,
+            province, country, creditCard, expiry, phone,
+            order: inventoryArray,
+            total: `$${total}`,
+        };
 
         // Once inventory is updated, a thank you message is returned. **IMPORTANT: AS LOCALSTORAGE IS A FRONT-END OBJECT, REMOVING THE ITEMS FROM LOCAL STORAGE IS IMPORTANT, BUT MUST BE DONE ON FRONT-END AFTER THIS FETCH REQUEST IS COMPLETED!!!**
         return res.status(200).json({
             status: 204,
             message: `Thank you for your purchase. Your order is now sent for processing.`,
-            data: inventoryArray,
+            data,
         })
     }
     catch (err) { // Error Catch
