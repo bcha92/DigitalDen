@@ -3,11 +3,11 @@ import Styled from "styled-components";
 
 export const SortDropdown = ({ onChangeHandler }) => {
   return (
-    <Div>
+    <Container>
       <label className="label">Sort by:</label>
 
-      <Select className="sort-dropdown" onChange={onChangeHandler}>
-        <option value="" disabled selected>
+      <Select className="sort-dropdown" onChange={onChangeHandler} defaultValue="">
+        <option value="" disabled>
           Select Sort Option
         </option>
         <option value="low-high">Price - Lowest to Highest</option>
@@ -15,13 +15,13 @@ export const SortDropdown = ({ onChangeHandler }) => {
         <option value="a-z">Name - A to Z</option>
         <option value="z-a">Name - Z to A</option>
       </Select>
-    </Div>
+    </Container>
   );
 };
 
 export default SortDropdown;
 
-const Div = Styled.div`
+const Container = Styled.div`
 display: flex;
 gap: 0.5rem;
 

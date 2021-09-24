@@ -174,7 +174,7 @@ const OutOfStock = styled.div`
   padding: 10px 50px;
   border-radius: 30px;
 `;
-const Button = styled(Link)`
+const Button = styled.button`
   margin-top: 10px;
   background-color: #ffa41c;
   color: black;
