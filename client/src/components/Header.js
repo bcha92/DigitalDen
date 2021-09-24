@@ -89,6 +89,7 @@ const List = styled.li`
   font-style: var(--heading-font-family);
   display: inline-block;
   padding-right: 30px;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     color: grey;
@@ -102,6 +103,26 @@ const StyledNavLink = styled(NavLink)``;
 
 const ShoppingCart = styled(FaShoppingCart)`
   cursor: pointer;
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+&:hover {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+&:hover {
+  -webkit-transform: scale(1.5) rotate(12deg);
+  transform: scale(1.5) rotate(-12deg);
 `;
 
 const LogInRegisterContainer = styled.div`
@@ -128,4 +149,12 @@ const Button = styled.button`
     color: grey;
     cursor: pointer;
   }
+
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+
 `;

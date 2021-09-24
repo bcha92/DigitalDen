@@ -49,8 +49,7 @@ export const SearchBar = () => {
                           {item.name.slice(
                             value.indexOf(value[value.length - 1])
                           )}
-                        </ResultText>
-                        {" "}
+                        </ResultText>{" "}
                       </SuggestionList>
                     </DetailLink>
                   );
@@ -67,6 +66,13 @@ const SearchInput = styled.input`
   width: 300px;
   height: 40px;
   border-radius: 3px;
+  padding-left: 10px;
+  border: 1px solid #c2c2c2;
+  outline-color: #a6a6a6;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 69%;
+  top: 18%;
 `;
 
 const SuggestionList = styled.li`
