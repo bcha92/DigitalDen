@@ -11,7 +11,6 @@ export const Confirmation = ({ tax }) => {
 
   const random = Math.floor(Math.random() * 100000);
   const lenghtOfCart = cartItems.length;
-  console.log(lenghtOfCart);
 
   cartItems.map(item => {
     subtotal += Number(item.price.slice(1)); // Subtotal Calculated with each item

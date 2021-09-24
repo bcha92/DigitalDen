@@ -87,7 +87,6 @@ const getUserById = async (req, res) => {
     const db = client.db("e-commerce-Project");
 
     const findUser = await db.collection("users").findOne({ email })
-    // console.log(findUser, 'finding user')
 
     // check if user exists. If so, send error, else create new user
     if (findUser === null) {

@@ -9,7 +9,6 @@ export const LogInOut = ({ setLoginData, userLogIn, setUserLogIn }) => {
   const handleInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    // console.log(name, value)
 
     setUserLogIn({ ...userLogIn, [name]: value });
   };

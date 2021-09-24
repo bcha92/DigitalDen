@@ -23,7 +23,6 @@ export const AllBrands = () => {
         // setStatus("loading complete")
       });
   }, []);
-  console.log(brand, " THIS IS BRAND");
 
   return (
     <>
