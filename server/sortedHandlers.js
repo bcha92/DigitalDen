@@ -23,6 +23,7 @@ const getSortedProducts = async (req, res) => {
         return arr;
     }
 
+    console.log(sortOrder, ' this is sort order')
     try {
         // Forward Alphabet Sorting A-Z
         if (sortOrder.toLowerCase() === "a-z") {
@@ -40,6 +41,8 @@ const getSortedProducts = async (req, res) => {
         if (sortOrder.toLowerCase() === "high-low") {
             sortedProducts = sortPrice(items).reverse();
         }
+
+        console.log(sortedProducts.length, " this is sorted profucts")
 
         // Return new sorted products in status
         return await res.status(200).json({
