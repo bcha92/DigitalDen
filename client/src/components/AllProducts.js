@@ -84,7 +84,15 @@ export const AllProducts = () => {
                 >
                   <Card>
                     <Img src={product.imageSrc} />
-                    <p>{product.name}</p>
+                    <p
+                      style={{
+                        margin: "10px",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                      }}
+                    >
+                      {product.name}
+                    </p>
                     <p>{product.price}</p>
 
                     {product.numInStock === 0 ? (
@@ -94,7 +102,9 @@ export const AllProducts = () => {
                         onClick={(e) => {
                           handleClick(e, product);
                         }}
+                        style={{ textDecoration: "none" }}
                       >
+                        {/* One-Click Buy */}
                         BUY NOW
                       </Button>
                     )}
@@ -177,7 +187,13 @@ const OutOfStock = styled.div`
   font-size: 10px;
   padding: 10px;
   border-radius: 30px;
+  margin: 10px;
 `;
 const Button = styled(Link)`
   margin-top: 10px;
+  background-color: #13dd90;
+  color: white;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 30px;
 `;
