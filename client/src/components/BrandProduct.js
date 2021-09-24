@@ -156,15 +156,6 @@ const SortContainer = styled.div`
   margin-right: 10rem;
 `;
 
-// const CheckboxContainer = styled.div`
-//   margin-top: 4rem;
-//   margin-right: 30rem;
-//   justify-content: flex-end;
-//   margin-bottom: -1.4rem;
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-
 const Title = styled.h1`
   display: flex;
   font-size: 20px;
@@ -206,5 +197,5 @@ const Button = styled.div`
 `;
 
 const Container = styled.div`
-margin-top: 40px;
-`
+  margin-top: 40px;
+`;
