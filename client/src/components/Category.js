@@ -49,7 +49,7 @@ export const Category = () => {
         <h1>Loading...</h1>
       )}
       <CardWrapper>
-        <Link to="/category/Fitness">
+        <Link to="/category/Fitness" style={{ textDecoration: "none" }}>
           <CategoryFitness
             style={{
               width: "350px",
@@ -62,7 +62,7 @@ export const Category = () => {
             <Text>Fitness</Text>
           </CategoryFitness>
         </Link>
-        <Link to="/category/Medical">
+        <Link to="/category/Medical" style={{ textDecoration: "none" }}>
           <CategoryMedical
             style={{
               width: "350px",
@@ -75,7 +75,7 @@ export const Category = () => {
             <Text>Medical</Text>
           </CategoryMedical>
         </Link>
-        <Link to="/category/Lifestyle">
+        <Link to="/category/Lifestyle" style={{ textDecoration: "none" }}>
           <CategoryLifestyle
             style={{
               width: "350px",
@@ -88,7 +88,7 @@ export const Category = () => {
             <Text>Lifestyle</Text>
           </CategoryLifestyle>
         </Link>
-        <Link to="/category/Entertainment">
+        <Link to="/category/Entertainment" style={{ textDecoration: "none" }}>
           <CategoryEntertainment
             style={{
               width: "350px",
@@ -101,7 +101,7 @@ export const Category = () => {
             <Text>Entertainment</Text>
           </CategoryEntertainment>
         </Link>
-        <Link to="/category/Industrial">
+        <Link to="/category/Industrial" style={{ textDecoration: "none" }}>
           <CategoryIndustrial
             style={{
               width: "350px",
@@ -114,7 +114,10 @@ export const Category = () => {
             <Text>Industrial</Text>
           </CategoryIndustrial>
         </Link>
-        <Link to="/category/Pets and Animals">
+        <Link
+          to="/category/Pets and Animals"
+          style={{ textDecoration: "none" }}
+        >
           <CategoryPetsAnimal
             style={{
               width: "350px",
@@ -127,7 +130,7 @@ export const Category = () => {
             <Text>Pets and Animals</Text>
           </CategoryPetsAnimal>
         </Link>
-        <Link to="/category/Gaming">
+        <Link to="/category/Gaming" style={{ textDecoration: "none" }}>
           <CategoryGaming
             style={{
               width: "350px",

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 export const CategoryProduct = () => {
   //this will store all products from a category from fetch
   const [products, setProducts] = useState();
   //will become true after the data from fetch as been stored
   const [isLoaded, setIsLoaded] = useState(false);
+  let history = useHistory();
+
   const { name } = useParams();
   useEffect(() => {
     fetch(`/category/${name}`)
@@ -19,6 +22,17 @@ export const CategoryProduct = () => {
         console.error("Error:", error);
       });
   }, [name]);
+
+  function handleClick(e, product) {
+    e.preventDefault();
+    if (localStorage.getItem("productInfo") === null) {
+      localStorage.setItem("productInfo", JSON.stringify([]));
+    }
+    let cart = JSON.parse(localStorage.getItem("productInfo"));
+    cart.push(product);
+    localStorage.setItem("productInfo", JSON.stringify(cart));
+    history.push("/cart");
+  }
 
   return (
     <Wrapper>
@@ -37,10 +51,30 @@ export const CategoryProduct = () => {
                 >
                   <Card>
                     <Img src={product.imageSrc} />
-                    <p>{product.name}</p>
+                    <p
+                      style={{
+                        margin: "10px",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                      }}
+                    >
+                      {product.name}
+                    </p>
                     <p>{product.price}</p>
-                    {product.numInStock === 0 && (
+                    {/* {product.numInStock === 0 && (
                       <OutOfStock>OUT OF STOCK</OutOfStock>
+                    )} */}
+                    {product.numInStock === 0 ? (
+                      <OutOfStock>OUT OF STOCK</OutOfStock>
+                    ) : (
+                      <Button
+                        onClick={(e) => {
+                          handleClick(e, product);
+                        }}
+                        style={{ textDecoration: "none" }}
+                      >
+                        BUY NOW
+                      </Button>
                     )}
                   </Card>
                 </Link>
@@ -92,10 +126,21 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
+  margin: 50px 0;
+  font-size: 25px;
 `;
 
 const OutOfStock = styled.div`
   background-color: #1313dd;
+  color: white;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 10px;
+`;
+const Button = styled(Link)`
+  margin-top: 10px;
+  background-color: #13dd90;
   color: white;
   font-size: 10px;
   padding: 10px;
