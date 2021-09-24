@@ -12,6 +12,12 @@ export const AllProducts = () => {
   //will become true after the data from fetch as been stored
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Button - View more
+  const [visible, setVisible] = useState(18);
+  const showMoreItems = () => {
+    setVisible((prevValue) => prevValue + 12);
+  };
+
   let history = useHistory();
 
   // Sorting type option
@@ -58,7 +64,7 @@ export const AllProducts = () => {
       {isLoaded ? (
         <>
           <Container>
-            {products.map((product) => {
+            {products.slice(0, visible).map((product) => {
               return (
                 <Link
                   to={`/details/${product._id}`}
@@ -95,6 +101,11 @@ export const AllProducts = () => {
                 </Link>
               );
             })}
+          </Container>
+          <Container>
+            <Link to="/products">
+              <ListItem onClick={showMoreItems}>View More</ListItem>
+            </Link>
           </Container>
         </>
       ) : (
@@ -186,14 +197,16 @@ const Button = styled(Link)`
   }
 `;
 
-//   -webkit-transform: perspective(1px) translateZ(0);
-//   transform: perspective(1px) translateZ(0);
-//   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-//   -webkit-transition-duration: 0.3s;
-//   transition-duration: 0.3s;
-//   -webkit-transition-property: transform;
-//   transition-property: transform;
-// }
-// &:hover {
-//   -webkit-transform: scale(.9);
-//   transform: scale(.9);
+const ListItem = styled.button`
+  margin-left: -7px;
+  border: none;
+  outline: none;
+  width: 120%;
+  cursor: pointer;
+  padding: 15px 20px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  border-radius: 5px;
+  background-color: #d1d1d1;
+  font-family: "Oswald", sans-serif;
+`;
