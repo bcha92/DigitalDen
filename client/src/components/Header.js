@@ -6,8 +6,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import GlobalStyles from "./GlobalStyles";
 
 export const Header = ({ loginData, userLogIn, setLoginData }) => {
-  console.log(loginData, " LOG IN DATA");
-  console.log(userLogIn.firs, " user log in");
   return (
     <>
       <GlobalStyles />

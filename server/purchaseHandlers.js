@@ -79,7 +79,7 @@ const purchaseHandle = async (req, res) => {
                         name: inventory.name,
                         price: inventory.price,
                         _id: inventory._id,
-                        quantity: cart.quantity,
+                        quantity: cartItem.quantity,
                     });
                 }
             })
