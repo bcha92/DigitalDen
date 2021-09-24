@@ -67,9 +67,6 @@ export const Checkout = ({ tax, setTax }) => {
       })
   })
 
-  const handleClick = () => { };
-
-  console.log(tax);
   return (
     <>
       <Wrapper>

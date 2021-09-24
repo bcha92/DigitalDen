@@ -36,7 +36,7 @@ export const AllProducts = () => {
       localStorage.setItem("productInfo", JSON.stringify([]));
     }
     let cart = JSON.parse(localStorage.getItem("productInfo"));
-    cart.push(product);
+    cart.push({...product, quantity: 1});
     localStorage.setItem("productInfo", JSON.stringify(cart));
     history.push("/cart");
   }
