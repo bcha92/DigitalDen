@@ -8,7 +8,7 @@
 
 ### [Kishant Kanaka](https://github.com/kskish)
 
-### [Muhanned Marafawi](https://github.com/nedmarafawi)
+### [Muhaned Marafawi](https://github.com/nedmarafawi)
 
 ### [Piyush Patel](https://github.com/Piyush-FSD)
 ---
