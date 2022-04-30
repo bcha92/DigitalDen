@@ -3,7 +3,6 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 export const LogInOut = ({ setLoginData, userLogIn, setUserLogIn }) => {
-  // variable to hold page route using history
   const formHistory = useHistory();
 
   const handleInput = (event) => {
@@ -71,15 +70,8 @@ export const LogInOut = ({ setLoginData, userLogIn, setUserLogIn }) => {
   );
 };
 
-// const Form = styled.form`
-// display: flex;
-// flex-direction: column;
-// align-items: center;
-// margin-top: 10vh;
-// `;
 const Wrapper = styled.div`
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   height: 100vh;
@@ -135,5 +127,3 @@ const Button = styled.div`
     color: white;
   }
 `;
-
-

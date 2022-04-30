@@ -77,8 +77,10 @@ const SearchInput = styled.input`
   outline-color: #a6a6a6;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
   position: absolute;
-  left: 69%;
+  left: 62%;
   top: 18%;
+  margin-top: 2.5vh;
+  font-size: 1.1rem;
 `;
 
 const SuggestionList = styled.li`
