@@ -13,10 +13,10 @@ export const Header = ({ loginData, userLogIn, setLoginData }) => {
         {loginData === undefined ? (
           <>
             <LogInLink to="/login">
-              <Button>Log In</Button>
+              <LoginOutRegisterButton>Log In</LoginOutRegisterButton>
             </LogInLink>
             <RegisterLink to="/register">
-              <Button>Register</Button>
+              <LoginOutRegisterButton>Register</LoginOutRegisterButton>
             </RegisterLink>
           </>
         ) : (
@@ -26,13 +26,13 @@ export const Header = ({ loginData, userLogIn, setLoginData }) => {
             </span>
 
             <LogInLink to="/login">
-              <Button
+              <LoginOutRegisterButton
                 onClick={() => {
                   setLoginData(undefined);
                 }}
               >
                 Log Out
-              </Button>
+              </LoginOutRegisterButton>
             </LogInLink>
           </>
         )}
@@ -74,6 +74,7 @@ const Title = styled.h1`
   font-style: var(--heading-font-family);
   font-size: 55px;
   padding-top: 50px;
+  padding-left: 15rem;
 `;
 
 const NavMenu = styled.ul`
@@ -82,6 +83,7 @@ const NavMenu = styled.ul`
   margin-top: 80px;
   justify-content: center;
   align-items: center;
+  padding-right: 15vw;
 `;
 
 const List = styled.li`
@@ -90,7 +92,7 @@ const List = styled.li`
   display: inline-block;
   padding-right: 30px;
   transition: all 0.2s ease-in-out;
-  font-size: 20px;
+  font-size: 1.5rem;
 
 `;
 
@@ -122,8 +124,8 @@ const ShoppingCart = styled(FaShoppingCart)`
 
 const LogInRegisterContainer = styled.div`
   float: right;
-  margin-right: 20px;
-  margin-top: 10px;
+  padding-right: 3vw;
+  padding-top: 2.5vh;
   top: 5px;
 `;
 
@@ -136,11 +138,11 @@ const LogInLink = styled(NavLink)`
   text-decoration: none;
   margin-right: 20px;
   color: grey;
+  font-size: 15px;
 `;
-const Button = styled.button`
+const LoginOutRegisterButton = styled.button`
   border: none;
   background: transparent;
-  &:hover {
     color: grey;
     cursor: pointer;
   }
@@ -151,6 +153,6 @@ const Button = styled.button`
   position: relative;
   overflow: hidden;
 
-
-  font-size: 20px;
+  color: black;
+  font-size: 23px;
 `;

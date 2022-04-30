@@ -1,15 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
-
 import casioLogo from ".././components/assets/casio.png";
 import fitbitLogo from ".././components/assets/fitbit.png";
 import polarLogo from ".././components/assets/polar.png";
 import nikeLogo from ".././components/assets/nike.png";
 import sonyLogo from ".././components/assets/sony.png";
 import tomtomLogo from ".././components/assets/tomtom.png";
-
 import backgroundImg from ".././components/assets/home-bg.jpg";
 
 export const Homepage = () => {
@@ -17,10 +14,6 @@ export const Homepage = () => {
     <>
       <BackgroundContainer>
         <BackgroundImg
-          style={{
-            width: "1450px",
-            height: "820px",
-          }}
           src={backgroundImg}
           alt="background"
         />
@@ -30,11 +23,7 @@ export const Homepage = () => {
         <Row>
           <Link to="/brands/13334">
             <ImgContainer>
-              <Img
-                style={{
-                  width: "200px",
-                  height: "45px",
-                }}
+              <CasioLogoImg
                 src={casioLogo}
                 alt="casio"
               />
@@ -42,8 +31,7 @@ export const Homepage = () => {
           </Link>
           <Link to="/brands/10759">
             <ImgContainer>
-              <Img
-                style={{ width: "216px", height: "50px" }}
+              <FitbitLogoImg
                 src={fitbitLogo}
                 alt="fitbit"
               />
@@ -51,8 +39,7 @@ export const Homepage = () => {
           </Link>
           <Link to="/brands/11939">
             <ImgContainer>
-              <Img
-                style={{ width: "180px", height: "120px" }}
+              <NikeLogoImg
                 src={nikeLogo}
                 alt="nike"
               />
@@ -62,8 +49,7 @@ export const Homepage = () => {
         <Row>
           <Link to="/brands/11837">
             <ImgContainer>
-              <Img
-                style={{ width: "216px", height: "120px" }}
+              <PolarLogoImg
                 src={polarLogo}
                 alt="polar"
               />
@@ -71,8 +57,7 @@ export const Homepage = () => {
           </Link>
           <Link to="/brands/18324">
             <ImgContainer>
-              <Img
-                style={{ width: "216px", height: "64px" }}
+              <TomtomLogoImg
                 src={tomtomLogo}
                 alt="tomtom"
               />
@@ -80,8 +65,7 @@ export const Homepage = () => {
           </Link>
           <Link to="/brands/12407">
             <ImgContainer>
-              <Img
-                style={{ width: "200px", height: "45px" }}
+              <SonyLogoImg
                 src={sonyLogo}
                 alt="sony"
               />
@@ -134,7 +118,35 @@ const ImgContainer = styled.div`
   }
 `;
 
-const Img = styled.img``;
+const CasioLogoImg = styled.img`
+ width: 200px;
+  height: 45px;
+`;
+
+const FitbitLogoImg = styled.img`
+width: 216px; 
+height: 50px;
+`;
+
+const NikeLogoImg = styled.img`
+width: 180px; 
+height: 120px;
+`;
+
+const PolarLogoImg = styled.img`
+width: 216px; 
+height: 120px;
+`;
+
+const TomtomLogoImg = styled.img`
+width: 216px; 
+height: 64px;
+`;
+
+const SonyLogoImg = styled.img`
+width: 200px; 
+height: 45px;
+`;
 
 const BackgroundContainer = styled.div`
   display: flex;
@@ -144,7 +156,9 @@ const BackgroundContainer = styled.div`
 
 const BackgroundImg = styled.img`
   border-radius: 10px;
-
+  width: 60vw;
+  height: 70vh;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   -webkit-transition-duration: 0.3s;
@@ -152,5 +166,4 @@ const BackgroundImg = styled.img`
   -webkit-transition-property: box-shadow;
   transition-property: box-shadow;
 
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 `;
